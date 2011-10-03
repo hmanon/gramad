@@ -1,0 +1,65 @@
+{
+	"identifier": "id", 
+	"label": "name", 
+	"items": [
+		{
+			"id": "1", 
+			"pid": "1", 
+			"name": "Config", 
+			"type": "config", 
+			"children": [
+				{
+					"_reference": "2"
+				}, 
+				{
+					"_reference": "3"
+				}
+			]
+		}, 
+		{
+			"id": "2", 
+			"pid": "1", 
+			"name": "General", 
+			"type": "general", 
+			"children": [
+				{
+					"_reference": "4"
+				}, 
+				{
+					"_reference": "5"
+				},
+                {
+                    "_reference": "6"
+                }				
+			]
+		}, 
+		{
+			"id": "4", 
+			"pid": "2", 
+			"name": "About", 
+			"type": "about", 
+			"aboutText": "About..."
+		}, 
+		{
+			"id": "5", 
+			"pid": "2", 
+			"name": "Credits", 
+			"type": "credits", 
+			"creditsText": "Credits..."
+		},
+        {
+            "id": "6", 
+            "pid": "2", 
+            "name": "Contacts", 
+            "type": "contacts", 
+            "contactsText": "Contacts..."
+        }, 		 
+		{
+			"id": "3", 
+			"pid": "1", 
+			"name": "Continents", 
+			"type": "catalog", 
+			"children": []
+		}
+	]
+}
