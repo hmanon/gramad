@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Admin"
+AuthUserFile /home/u234822/test.gramadskikh.com/.htpasswd
+require valid-user 
