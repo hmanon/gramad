@@ -32,21 +32,21 @@ dojo.declare('garm.components.main.MainMenuController', null, {
         }));
         menu.addChild(new dijit.MenuSeparator());
         menu.addChild(new dijit.MenuItem({
-            label: "Create Fork",
+            label: "Create Version",
             iconClass: "dijitIcon dijitIconUndo",
             onClick: function() {
                 dojo.publish(garm.app.Constants.TOPIC_FORK_CREATE, []);
             }
         }));
         menu.addChild(new dijit.MenuItem({
-            label: "Select Fork",
+            label: "Select Version",
             iconClass: "dijitIcon dijitIconUndo",
             onClick: function() {
                 dojo.publish(garm.app.Constants.TOPIC_FORK_SELECT, []);
             }
         }));
         menu.addChild(new dijit.MenuItem({
-            label: "Switch Fork",
+            label: "Activate Version",
             iconClass: "dijitIcon dijitIconUndo",
             onClick: function() {
                 dojo.publish(garm.app.Constants.TOPIC_FORK_SWITCH, []);
@@ -58,14 +58,25 @@ dojo.declare('garm.components.main.MainMenuController', null, {
             dropDown: menu
         }).placeAt(parent.domNode);
 
+        dojo.create('br', null, parent.domNode);
         this._selectedForkLabel = dojo.create('label', null, parent.domNode);
+        dojo.create('br', null, parent.domNode);
+        this._switchedForkLabel = dojo.create('label', null, parent.domNode);
     },
 
 
-    setForkLabel : function(fork) {
+    setSelectedForkLabel : function(fork) {
 
         dojo.attr(this._selectedForkLabel, {
-            innerHTML : 'Editing fork <b>"' + fork + '"</b>'
+            innerHTML : 'Selected Version: <b>"' + fork + '"</b>'
+        });
+    },
+
+
+    setSwitchedForkLabel : function(fork) {
+
+        dojo.attr(this._switchedForkLabel, {
+            innerHTML : 'Activated Version: <b>"' + fork + '"</b>'
         });
     }
 });

@@ -24,7 +24,25 @@ dojo.declare('garm.app.AppController', null, {
 
     init : function() {
 
+        this._updateSwitchedForkLabel();
         this._showForkSelection();
+    },
+
+
+    _updateSwitchedForkLabel: function() {
+
+        var onFetch = dojo.hitch(this, function(forks) {
+            for(var fork in forks) {
+                if (forks[fork]) {
+                    this._main.setSwitchedForkLabel(fork);
+                }
+            }
+        });
+
+        this._fetchForks({
+            mark       : 'current',
+            onComplete : onFetch
+        });
     },
 
 
@@ -32,7 +50,7 @@ dojo.declare('garm.app.AppController', null, {
 
         var askFork = dojo.hitch(this, function(forks) {
             garm.components.popup.PopUpFactory.getInstance().askOptions({
-                title : 'Select fork',
+                title : 'Select Version',
                 options : forks,
                 onOk : dojo.hitch(this, function(result) {
                     this._selectFork(result.value.option);
@@ -51,7 +69,7 @@ dojo.declare('garm.app.AppController', null, {
 
         var askFork = dojo.hitch(this, function(forks) {
             garm.components.popup.PopUpFactory.getInstance().askOptions({
-                title : 'Switch fork',
+                title : 'Switch Version',
                 options : forks,
                 onOk : dojo.hitch(this, function(result) {
                     this._switchFork(result.value.option);
@@ -110,7 +128,8 @@ dojo.declare('garm.app.AppController', null, {
                 mark     : 'current'
             },
             load : dojo.hitch(this, function(result) {
-                this._showSuccess('Current fork was switched to "' + fork + '"');
+                this._main.setSwitchedForkLabel(fork);
+                this._showSuccess('Version "' + fork + '" was activated');
             }),
             error : this._showError
         });

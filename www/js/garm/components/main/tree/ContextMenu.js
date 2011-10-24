@@ -91,17 +91,17 @@ dojo.declare('garm.components.main.tree.ContextMenu', dijit.Menu, {
               item  : item
             },
             separator,
-            { label : 'Create Fork',
+            { label : 'Create Version',
               topic : garm.app.Constants.TOPIC_FORK_CREATE,
               iconClass: "dijitIcon dijitIconUndo",
               item  : item
             },
-            { label : 'Select Fork',
+            { label : 'Select Version',
               topic : garm.app.Constants.TOPIC_FORK_SELECT,
               iconClass: "dijitIcon dijitIconUndo",
               item  : item
             },
-            { label : 'Switch Fork',
+            { label : 'Switch Version',
               topic : garm.app.Constants.TOPIC_FORK_SWITCH,
               iconClass: "dijitIcon dijitIconUndo",
               item  : item

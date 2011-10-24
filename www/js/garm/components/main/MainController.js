@@ -54,8 +54,14 @@ dojo.declare('garm.components.main.MainController', null, {
 
     update : function(fork) {
 
-        this._mainMenu.setForkLabel(fork);
+        this._mainMenu.setSelectedForkLabel(fork);
         this._fetchRepo();
+    },
+
+
+    setSwitchedForkLabel : function(fork) {
+
+        this._mainMenu.setSwitchedForkLabel(fork);
     },
 
 
@@ -241,21 +247,21 @@ dojo.declare('garm.components.main.MainController', null, {
     _createFork : function(item) {
 
         var now = new Date();
-        var fork = 'fork at '
+        var fork = 'Version at '
                    + now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate()
                    + ' '
                    + now.getHours() + ':' + now.getMinutes()
                    ;
         garm.components.popup.PopUpFactory.getInstance().askNewValue({
-            title : 'Create fork',
+            title : 'Create Version',
             oldValue : fork,
             onOk : dojo.hitch(this, function(result) {
                 if (this._mainForm.commitChanges()) {
                     this._mainStore.createFork({
                         fork : result.value.newValue,
                         onComplete : dojo.hitch(this, function() {
-                            this._mainMenu.setForkLabel(result.value.newValue);
-                            this._showSuccess('fork "' + result.value.newValue + '" created');
+                            this._mainMenu.setSelectedForkLabel(result.value.newValue);
+                            this._showSuccess('Version "' + result.value.newValue + '" created');
                         }),
                         onError : dojo.hitch(this, this._showError)
                     });
