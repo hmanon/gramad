@@ -1,5 +1,6 @@
 <?php
-require_once dirname(__FILE__).'/config.php';
+require_once dirname(__FILE__).'/../config.php';
+require_once 'libs/Zebra/Zebra_Image.php';
 
 
 function treat_getData($request) {
@@ -68,15 +69,69 @@ function treat_getForks($request) {
 }
 
 
-function treat_PostImage($files){ 
-    return json_encode(treatImages($files['imageURL']));
+function treat_postImage($files, $request) {
+    try {
+        $images = $files['imageURL'];
+        $images = treatImages ($images, $request);
+        $images = resizeImages($images, $request);
+        $images = cutImages   ($images, $request);
+        return json_encode((object)$images);
+    }
+    catch(Exception $e) {
+        throw $e;
+    }
 }
 
 
-function treatImages($files) {
+function resizeImages(&$images, $request) {
+    foreach($images as &$image) {
+        resizeImage($image, $request);
+    }
+    return $images;
+}
 
-    $folder = IMAGE_PATH;
 
+function resizeImage(&$image, $request) {
+    static $errCodes = array(
+        0 => 'There is no error, the file resized with success.',
+        1 => 'Source file could not be found.',
+        2 => 'Source file is not readable.',
+        3 => 'Could not write target file.',
+        4 => 'Unsupported source file format.',
+        5 => 'Unsupported target file format.',
+        6 => 'GD library version does not support target file format.',
+        7 => 'GD library is not installed.',
+        8 => '"chmod" command is disabled via configuration'
+    );    
+    if (!$image['result']) {
+        return;
+    }
+    $resizeWidth  = array_key_exists('resizeWidth',  $request) ? $request['resizeWidth']  : false;
+    $resizeHeight = array_key_exists('resizeHeight', $request) ? $request['resizeHeight'] : false;
+    if (   ($resizeWidth  === false) 
+        && ($resizeHeight === false)
+    ) {
+        return;
+    }
+    $zebraImage = new Zebra_Image();
+    $zebraImage->source_path = $image['url'];
+    $zebraImage->target_path = $image['url'];
+    $zebraImage->jpeg_quality = 100;
+    
+    $image['result'] = $zebraImage->resize($resizeWidth, $resizeHeight, ZEBRA_IMAGE_CROP_CENTER);
+    $image['status'] = array_key_exists($zebraImage->error, $errCodes)
+        ? $errCodes[$zebraImage->error] 
+        : 'Unknown error status'
+        ;
+}
+
+
+function cutImages(&$images, $request) {
+    return $images;
+}
+
+
+function treatImages($files, $request) {
     static $errCodes = array(
         UPLOAD_ERR_OK         => 'There is no error, the file uploaded with success.',
         UPLOAD_ERR_INI_SIZE   => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
@@ -87,25 +142,28 @@ function treatImages($files) {
         UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
         UPLOAD_ERR_EXTENSION  => 'A PHP extension stopped the file upload'
     );
+    
+    $folder = IMAGE_PATH;
+
     if (empty($files)) {
-        return 'Unknown error';
+        throw new Exception('Unknown error');
     }
     if (!is_dir(realpath($folder))) {
         if (!mkdir($folder, 0777)) {
-            return "Can`t create folder: $folder";
+            throw new Exception("Can`t create folder: $folder");
         }
     }
-
     $response = array();
-
     foreach ($files['name'] as $i => $name) {
-
         $error     = $files['error'][$i];
-        $name      = $files['name'][$i];
+        $name      = $files['name'] [$i];
         $extension = pathinfo($name, PATHINFO_EXTENSION);
 
         $response[$name]['result'] = false;
-        $response[$name]['status'] = $errCodes[$error];
+        $response[$name]['status'] = array_key_exists($error, $errCodes)
+            ? $errCodes[$error] 
+            : 'Unknown error status'
+            ;
 
         switch ($error) {
 
@@ -127,7 +185,7 @@ function treatImages($files) {
                 break;
         }
     }
-    return (object)$response;
+    return $response;
 }
 
 

@@ -117,6 +117,18 @@ dojo.declare('garm.components.popup.PopUpFactory', null, {
             + ((params.maxFileSize)
                     ? '<input type="hidden" name="MAX_FILE_SIZE" value="' + params.maxFileSize + '"/>'
                     : '')
+            + ((params.resizeWidth)
+                    ? '<input type="hidden" name="resizeWidth" value="' + params.resizeWidth + '"/>'
+                    : '')
+            + ((params.resizeHeight)
+                    ? '<input type="hidden" name="resizeHeight" value="' + params.resizeHeight + '"/>'
+                    : '')
+            + ((params.cutByX)
+                    ? '<input type="hidden" name="cutByX" value="' + params.cutByX + '"/>'
+                    : '')
+            + ((params.cutByY)
+                    ? '<input type="hidden" name="cutByY" value="' + params.cutByY + '"/>'
+                    : '')
             + '<input'
               + ' type="file"'
               + ' name="imageURL[]"'

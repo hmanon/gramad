@@ -14,7 +14,7 @@ dojo.declare('garm.components.main.form.FormImage', garm.components.main.form.Fo
 
         dojo.html.set(
             this.domNode,
-            '<table style="height:100%; width:100%; padding:10px">'
+            '<table style="height:auto; width:100%; padding:10px">'
             + '<tr><td style="height:auto; width:100%;">'
               + '<label>Background color:</label>'
               + '<div dojoType="dijit.form.DropDownButton"'
@@ -35,15 +35,19 @@ dojo.declare('garm.components.main.form.FormImage', garm.components.main.form.Fo
                  + '</div>'
               + '</div>'
             + '</td></tr>'
-            + '<tr><td style="height:auto%; width:100%;">'
+            + '<tr><td style="height:auto; width:100%;">'
               + '<label>Preview:</label>'
               + '<br>'
-              + '<img id="previewPlaceHolder" style="width: 60px;"/>'
+              + '<img id="previewPlaceHolder"'
+                + ' style="width: ' + garm.app.Constants.IMAGE_PREVIEW_WIDTH + 'px; height: ' + garm.app.Constants.IMAGE_PREVIEW_HEIGHT + 'px;"'
+                + '/>'
             + '</td></tr>'
-            + '<tr><td style="height:auto%; width:100%;">'
+            + '<tr><td style="height:auto; width:100%;">'
               + '<label>Full size:</label>'
               + '<br>'
-              + '<img id="bigImagePlaceHolder" style="width: 600px;"/>'
+              + '<img id="bigImagePlaceHolder"'
+                + ' style="width: ' + garm.app.Constants.IMAGE_WIDTH + 'px; height: ' + garm.app.Constants.IMAGE_HEIGHT + 'px;"'
+                + '/>'
             + '</td></tr>'
             + '</table>',
             {   parseContent: true,

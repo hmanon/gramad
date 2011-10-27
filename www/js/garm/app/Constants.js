@@ -47,6 +47,12 @@ garm.app.Constants.FLD_IMAGE_PREVIEW_URL = 'imagePreviewUrl';
 garm.app.Constants.FLD_IMAGE_URL         = 'imageUrl';
 garm.app.Constants.FLD_IMAGE_CLR         = 'imageColor';
 
+garm.app.Constants.IMAGE_WIDTH  = 1024;
+garm.app.Constants.IMAGE_HEIGHT = 768;
+
+garm.app.Constants.IMAGE_PREVIEW_WIDTH  = 48;
+garm.app.Constants.IMAGE_PREVIEW_HEIGHT = 36;
+
 garm.app.Constants.STORE_META = (function() {
 
     var meta = {};

@@ -1,8 +1,8 @@
 <?php
-require_once dirname(__FILE__).'/../../include/config.php';
-require_once 'util.php';
+require_once dirname(__FILE__).'/../../config.php';
+require_once 'include/util.php';
 
-$result = treat_PostImage($_FILES);
+$result = treat_postImage($_FILES, $_POST);
 ?>
 
 <html>

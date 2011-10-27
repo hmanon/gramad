@@ -160,20 +160,29 @@ dojo.declare('garm.components.main.MainController', null, {
         this._doAddImage(
             parentItem, {
                 type : garm.app.Constants.TYPE_IMAGE
-            }, garm.app.Constants.FLD_IMAGE_URL
+            }, garm.app.Constants.FLD_IMAGE_URL, {
+                resizeWidth  : garm.app.Constants.IMAGE_WIDTH,
+                resizeHeight : garm.app.Constants.IMAGE_HEIGHT
+            }
         );
     },
 
 
     _changeImage : function(item) {
 
-        this._doChangeImage(item, garm.app.Constants.FLD_IMAGE_URL);
+        this._doChangeImage(item, garm.app.Constants.FLD_IMAGE_URL, {
+            resizeWidth  : garm.app.Constants.IMAGE_WIDTH,
+            resizeHeight : garm.app.Constants.IMAGE_HEIGHT
+        });
     },
 
 
     _changePreview : function(item) {
 
-        this._doChangeImage(item, garm.app.Constants.FLD_IMAGE_PREVIEW_URL);
+        this._doChangeImage(item, garm.app.Constants.FLD_IMAGE_PREVIEW_URL, {
+            resizeWidth  : garm.app.Constants.IMAGE_PREVIEW_WIDTH,
+            resizeHeight : garm.app.Constants.IMAGE_PREVIEW_HEIGHT
+        });
     },
 
 
@@ -298,7 +307,7 @@ dojo.declare('garm.components.main.MainController', null, {
     },
 
 
-    _doAddImage : function(parentItem, keywordArgs, field) {
+    _doAddImage : function(parentItem, keywordArgs, field, imageParams) {
 
         var onUpload = dojo.hitch(this, function(response, ioArgs) {
 
@@ -350,17 +359,17 @@ dojo.declare('garm.components.main.MainController', null, {
             garm.app.Constants.TYPE_IMAGE, parentItem
         );
         if (0 != maxCount) {
-            garm.components.popup.PopUpFactory.getInstance().askForFiles({
+            garm.components.popup.PopUpFactory.getInstance().askForFiles(dojo.mixin({
                 title : 'Upload images',
                 multiple : true,
                 maxFileSize : 10 * 1024 * 1024,
                 onOk : onFileSelect
-            });
+            }, imageParams));
         }
     },
 
 
-    _doChangeImage : function(item, field) {
+    _doChangeImage : function(item, field, imageParams) {
 
         var onUpload = dojo.hitch(this, function(response, ioArgs) {
 
@@ -407,11 +416,11 @@ dojo.declare('garm.components.main.MainController', null, {
             }
         });
 
-        garm.components.popup.PopUpFactory.getInstance().askForFiles({
+        garm.components.popup.PopUpFactory.getInstance().askForFiles(dojo.mixin({
             title : 'Upload image',
             multiple : false,
             maxFileSize : 10 * 1024 * 1024,
             onOk : onFileSelect
-        });
+        }, imageParams));
     }
 });
