@@ -344,13 +344,17 @@ dojo.declare('garm.components.main.MainController', null, {
 
         var onFileSelect = dojo.hitch(this, function(result) {
             if (result.form.isValid()) {
-                dojo.io.iframe.send({
+                var deferred = dojo.io.iframe.send({
                     form     : result.form.domNode,
                     url      : garm.app.Constants.IMAGE_POST_URL,
                     method   : 'post',
                     handleAs : 'json',
                     error    : dojo.hitch(this, this._showError),
                     load     : onUpload
+                });
+                garm.components.popup.PopUpFactory.getInstance().progress({
+                    deferred : deferred,
+                    content : '<label style="color: green;">Upload Image(s)</label>'
                 });
             }
         });
@@ -405,13 +409,17 @@ dojo.declare('garm.components.main.MainController', null, {
 
         var onFileSelect = dojo.hitch(this, function(result) {
             if (result.form.isValid()) {
-                dojo.io.iframe.send({
+                var deferred = dojo.io.iframe.send({
                     form     : result.form.domNode,
                     url      : garm.app.Constants.IMAGE_POST_URL,
                     method   : 'post',
                     handleAs : 'json',
                     error    : dojo.hitch(this, this._showError),
                     load     : onUpload
+                });
+                garm.components.popup.PopUpFactory.getInstance().progress({
+                    deferred : deferred,
+                    content : '<label style="color: green;">Upload Image(s)</label>'
                 });
             }
         });

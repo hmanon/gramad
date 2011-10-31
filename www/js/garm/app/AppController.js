@@ -86,7 +86,7 @@ dojo.declare('garm.app.AppController', null, {
 
     _fetchForks : function(params) {
 
-        dojo.xhrPost({
+        var deferred = dojo.xhrPost({
             url          : garm.app.Constants.STORE_FORK_URL,
             handleAs     : 'json',
             preventCache : true,
@@ -96,12 +96,13 @@ dojo.declare('garm.app.AppController', null, {
             load  : params.onComplete,
             error : this._showError
         });
+        this._showProgress(deferred, 'Fetch Versions');
     },
 
 
     _selectFork : function(fork) {
 
-        dojo.xhrPost({
+        var deferred = dojo.xhrPost({
             url          : garm.app.Constants.STORE_FORK_URL,
             handleAs     : 'json',
             preventCache : true,
@@ -114,12 +115,13 @@ dojo.declare('garm.app.AppController', null, {
             }),
             error : this._showError
         });
+        this._showProgress(deferred, 'Select Version');
     },
 
 
     _switchFork : function(fork) {
 
-        dojo.xhrPost({
+        var deferred = dojo.xhrPost({
             url          : garm.app.Constants.STORE_FORK_URL,
             handleAs     : 'json',
             preventCache : true,
@@ -132,6 +134,16 @@ dojo.declare('garm.app.AppController', null, {
                 this._showSuccess('Version "' + fork + '" was activated');
             }),
             error : this._showError
+        });
+        this._showProgress(deferred, 'Activate Version');
+    },
+
+
+    _showProgress : function(deferred, message) {
+
+        garm.components.popup.PopUpFactory.getInstance().progress({
+            deferred: deferred,
+            content : '<label style="color: black;">' + message + '</label>'
         });
     },
 

@@ -31,6 +31,27 @@ dojo.declare('garm.components.popup.PopUpFactory', null, {
 	},
 
 
+	progress : function(params) {
+
+        var popUp = this.create(dojo.mixin({
+            title : 'Wait..'
+        }, params));
+
+        params.deferred.addCallback(function(data) {
+            popUp.hide();
+            popUp.destroyRecursive();
+        });
+
+        params.deferred.addErrback(function(error) {
+            popUp.hide();
+            popUp.destroyRecursive();
+        });
+        popUp.show();
+
+        return popUp;
+    },
+
+
 	info : function(params) {
 
 	    return this.message(dojo.mixin({
@@ -207,7 +228,7 @@ dojo.declare('garm.components.popup.PopUpFactory', null, {
     	    + ' >'
             + '<div'
               + ' class="dijitDialogPaneContentArea"'
-              + ' style="max-width: 600px; max-height: 600px; overflow: auto">'
+              + ' style="min-width: 120px; min-height: 90px; max-width: 600px; max-height: 600px; overflow: auto">'
               + params.content
             + '</div>'
             + '<div class="dijitDialogPaneActionBar">' + buttons + '</div>'
