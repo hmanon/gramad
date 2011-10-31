@@ -11,9 +11,7 @@ dojo.declare('garm.components.main.form.FormImage', garm.components.main.form.Fo
     init : function() {
 
         this.inherited(arguments);
-
-        dojo.html.set(
-            this.domNode,
+        this.setContent(
             '<table style="height:auto; width:100%; padding:10px">'
             + '<tr><td style="height:auto; width:100%;">'
               + '<label>Background color:</label>'

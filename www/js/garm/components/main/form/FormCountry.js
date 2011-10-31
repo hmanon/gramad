@@ -12,9 +12,7 @@ dojo.declare('garm.components.main.form.FormCountry', garm.components.main.form.
     init : function() {
 
         this.inherited(arguments);
-
-        dojo.html.set(
-            this.domNode,
+        this.setContent(
             '<input type="file" name="imageURL[]" id="imageURL" multiple=""/>',
             {   parseContent: true,
                 onBegin : function() {

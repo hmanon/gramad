@@ -12,9 +12,7 @@ dojo.declare('garm.components.main.form.FormContacts', garm.components.main.form
     init : function() {
 
         this.inherited(arguments);
-
-        dojo.html.set(
-            this.domNode,
+        this.setContent(
             '<table style="height:100%; width:100%; padding:10px">'
             + '<tr><td style="height:auto; width:100%;"><label for="' + garm.app.Constants.FLD_CONTACTS + '">Text:</label></td></tr>'
             + '<tr><td style="height:100%; width:100%;">'
