@@ -74,7 +74,7 @@ function treat_postImage($files, $request) {
         $images = $files['imageURL'];
         $images = treatImages ($images, $request);
         $images = resizeImages($images, $request);
-        $images = cutImages   ($images, $request);
+        $images = cropImages  ($images, $request);
         return json_encode((object)$images);
     }
     catch(Exception $e) {
@@ -92,17 +92,6 @@ function resizeImages(&$images, $request) {
 
 
 function resizeImage(&$image, $request) {
-    static $errCodes = array(
-        0 => 'There is no error, the file resized with success.',
-        1 => 'Source file could not be found.',
-        2 => 'Source file is not readable.',
-        3 => 'Could not write target file.',
-        4 => 'Unsupported source file format.',
-        5 => 'Unsupported target file format.',
-        6 => 'GD library version does not support target file format.',
-        7 => 'GD library is not installed.',
-        8 => '"chmod" command is disabled via configuration'
-    );    
     if (!$image['result']) {
         return;
     }
@@ -119,15 +108,74 @@ function resizeImage(&$image, $request) {
     $zebraImage->jpeg_quality = 100;
     
     $image['result'] = $zebraImage->resize($resizeWidth, $resizeHeight, ZEBRA_IMAGE_CROP_CENTER);
-    $image['status'] = array_key_exists($zebraImage->error, $errCodes)
-        ? $errCodes[$zebraImage->error] 
-        : 'Unknown error status'
-        ;
+    $image['status'] = extractZebraError($zebraImage);
 }
 
 
-function cutImages(&$images, $request) {
+function cropImages(&$images, $request) {
+    foreach($images as &$image) {
+        cropImage($image, $request);
+    }
     return $images;
+}
+
+
+function cropImage(&$image, $request) {
+    if (!$image['result']) {
+        return;
+    }
+    $cropWidthCount  = array_key_exists('cropWidthCount',  $request) ? $request['cropWidthCount']  : false;
+    $cropHeightCount = array_key_exists('cropHeightCount', $request) ? $request['cropHeightCount'] : false;
+    if (   ($cropWidthCount  === false) 
+        && ($cropHeightCount === false)
+    ) {
+        return;
+    }
+    list($width, $height) = getimagesize($image['url']);
+    for($w = 0; $w < $cropWidthCount; ++$w) {
+        for($h = 0; $h < $cropHeightCount; ++$h) {
+            $zebraImage = new Zebra_Image();
+            $zebraImage->source_path = $image['url'];
+            $zebraImage->target_path = "{$image['url']}_{$w}_{$h}";
+            $zebraImage->jpeg_quality = 100;
+            
+            $image['result'] = $zebraImage->crop(
+                ($w + 0) * $width  / $cropWidthCount,
+                ($h + 0) * $height / $cropHeightCount,
+                ($w + 1) * $width  / $cropWidthCount,
+                ($h + 1) * $height / $cropHeightCount
+            );
+            $image['status'] = extractZebraError($zebraImage);
+            if (!array_key_exists('crop', $image)) {
+                $image['crop'] = array();
+            }
+            if (!array_key_exists($w, $image['crop'])) {
+                $image['crop'][$w] = array();
+            }
+            $image['crop'][$w][$h] = array(
+                'url' => $zebraImage->target_path
+            );
+        }
+    }
+}
+
+
+function extractZebraError($zebraImage) {
+    static $errCodes = array(
+        0 => 'There is no error, the file resized with success.',
+        1 => 'Source file could not be found.',
+        2 => 'Source file is not readable.',
+        3 => 'Could not write target file.',
+        4 => 'Unsupported source file format.',
+        5 => 'Unsupported target file format.',
+        6 => 'GD library version does not support target file format.',
+        7 => 'GD library is not installed.',
+        8 => '"chmod" command is disabled via configuration'
+    );
+    return array_key_exists($zebraImage->error, $errCodes)
+        ? $errCodes[$zebraImage->error] 
+        : 'Unknown error status'
+        ;
 }
 
 

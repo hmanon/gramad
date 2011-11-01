@@ -34,8 +34,16 @@ dojo.declare('garm.components.popup.PopUpFactory', null, {
 	progress : function(params) {
 
         var popUp = this.create(dojo.mixin({
-            title : 'Wait..'
+            title : 'Operation in progress',
+            content : '<img'
+                      + ' src="' + garm.app.Constants.IMG_LOADER  +'"'
+                      + ' alt="Wait Please.."'
+                      + '/>'
         }, params));
+
+        + '<img id="previewPlaceHolder"'
+        + ' style="width: ' + garm.app.Constants.IMAGE_PREVIEW_WIDTH + 'px; height: ' + garm.app.Constants.IMAGE_PREVIEW_HEIGHT + 'px;"'
+        + '/>'
 
         params.deferred.addCallback(function(data) {
             popUp.hide();

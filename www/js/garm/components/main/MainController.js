@@ -354,7 +354,7 @@ dojo.declare('garm.components.main.MainController', null, {
                 });
                 garm.components.popup.PopUpFactory.getInstance().progress({
                     deferred : deferred,
-                    content : '<label style="color: green;">Upload Image(s)</label>'
+                    title : 'Upload Image(s)'
                 });
             }
         });
@@ -419,7 +419,7 @@ dojo.declare('garm.components.main.MainController', null, {
                 });
                 garm.components.popup.PopUpFactory.getInstance().progress({
                     deferred : deferred,
-                    content : '<label style="color: green;">Upload Image(s)</label>'
+                    title : 'Upload Image(s)'
                 });
             }
         });

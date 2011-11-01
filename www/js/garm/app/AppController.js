@@ -139,11 +139,11 @@ dojo.declare('garm.app.AppController', null, {
     },
 
 
-    _showProgress : function(deferred, message) {
+    _showProgress : function(deferred, title) {
 
         garm.components.popup.PopUpFactory.getInstance().progress({
             deferred: deferred,
-            content : '<label style="color: black;">' + message + '</label>'
+            title : title
         });
     },
 
