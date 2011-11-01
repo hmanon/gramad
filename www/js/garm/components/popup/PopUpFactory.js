@@ -152,11 +152,11 @@ dojo.declare('garm.components.popup.PopUpFactory', null, {
             + ((params.resizeHeight)
                     ? '<input type="hidden" name="resizeHeight" value="' + params.resizeHeight + '"/>'
                     : '')
-            + ((params.cutByX)
-                    ? '<input type="hidden" name="cutByX" value="' + params.cutByX + '"/>'
+            + ((params.cropWidthCount)
+                    ? '<input type="hidden" name="cropWidthCount" value="' + params.cropWidthCount + '"/>'
                     : '')
-            + ((params.cutByY)
-                    ? '<input type="hidden" name="cutByY" value="' + params.cutByY + '"/>'
+            + ((params.cropHeightCount)
+                    ? '<input type="hidden" name="cropHeightCount" value="' + params.cropHeightCount + '"/>'
                     : '')
             + '<input'
               + ' type="file"'

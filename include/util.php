@@ -136,7 +136,13 @@ function cropImage(&$image, $request) {
         for($h = 0; $h < $cropHeightCount; ++$h) {
             $zebraImage = new Zebra_Image();
             $zebraImage->source_path = $image['url'];
-            $zebraImage->target_path = "{$image['url']}_{$w}_{$h}";
+            $zebraImage->target_path = 
+            	dirname($image['url'])
+              . DIRECTORY_SEPARATOR
+              . basename($image['url'], '.'.pathinfo($image['url'], PATHINFO_EXTENSION))
+              . "_$w_{$h}"
+              . '.'.pathinfo($image['url'], PATHINFO_EXTENSION)
+              ;
             $zebraImage->jpeg_quality = 100;
             
             $image['result'] = $zebraImage->crop(

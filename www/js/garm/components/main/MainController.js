@@ -42,6 +42,7 @@ dojo.declare('garm.components.main.MainController', null, {
 
         dojo.subscribe(garm.app.Constants.TOPIC_ADD_CONTINENT, this, this._addContinent);
         dojo.subscribe(garm.app.Constants.TOPIC_ADD_COUNTRY, this, this._addCountry);
+        dojo.subscribe(garm.app.Constants.TOPIC_CHA_COUNTRY_DRAPES, this, this._changeCountryDrapes);
         dojo.subscribe(garm.app.Constants.TOPIC_ADD_IMAGE, this, this._addImage);
         dojo.subscribe(garm.app.Constants.TOPIC_CHA_IMAGE, this, this._changeImage);
         dojo.subscribe(garm.app.Constants.TOPIC_CHA_PREVIEW, this, this._changePreview);
@@ -155,6 +156,18 @@ dojo.declare('garm.components.main.MainController', null, {
     },
 
 
+    _changeCountryDrapes : function(item) {
+        var responseMap = {};
+        responseMap[garm.app.Constants.FLD_COUNTRY_DRAPES] = 'crop';
+        this._doChangeImage(item, responseMap, {
+            resizeWidth     : garm.app.Constants.COUNTRY_DRAPES_WIDTH,
+            resizeHeight    : garm.app.Constants.COUNTRY_DRAPES_HEIGHT,
+            cropWidthCount  : garm.app.Constants.COUNTRY_DRAPES_CROP_WIDTH_COUNT,
+            cropHeightCount : garm.app.Constants.COUNTRY_DRAPES_CROP_HEIGHT_COUNT
+        });
+    },
+
+
     _addImage : function(parentItem) {
 
         this._doAddImage(
@@ -169,8 +182,9 @@ dojo.declare('garm.components.main.MainController', null, {
 
 
     _changeImage : function(item) {
-
-        this._doChangeImage(item, garm.app.Constants.FLD_IMAGE_URL, {
+        var responseMap = {};
+        responseMap[garm.app.Constants.FLD_IMAGE_URL] = 'url';
+        this._doChangeImage(item, responseMap, {
             resizeWidth  : garm.app.Constants.IMAGE_WIDTH,
             resizeHeight : garm.app.Constants.IMAGE_HEIGHT
         });
@@ -178,8 +192,9 @@ dojo.declare('garm.components.main.MainController', null, {
 
 
     _changePreview : function(item) {
-
-        this._doChangeImage(item, garm.app.Constants.FLD_IMAGE_PREVIEW_URL, {
+        var responseMap = {};
+        responseMap[garm.app.Constants.FLD_IMAGE_PREVIEW_URL] = 'url';
+        this._doChangeImage(item, responseMap, {
             resizeWidth  : garm.app.Constants.IMAGE_PREVIEW_WIDTH,
             resizeHeight : garm.app.Constants.IMAGE_PREVIEW_HEIGHT
         });
@@ -373,7 +388,7 @@ dojo.declare('garm.components.main.MainController', null, {
     },
 
 
-    _doChangeImage : function(item, field, imageParams) {
+    _doChangeImage : function(item, responseMap, imageParams) {
 
         var onUpload = dojo.hitch(this, function(response, ioArgs) {
 
@@ -394,7 +409,9 @@ dojo.declare('garm.components.main.MainController', null, {
                       + '</li>';
 
                     if (result) {
-                        this._mainStore.setValue(item, field, response[fileName]['url']);
+                        for(var field in responseMap) {
+                            this._mainStore.setValue(item, field, response[fileName][responseMap[field]]);
+                        }
                         this._updateUI();
                     }
                 }

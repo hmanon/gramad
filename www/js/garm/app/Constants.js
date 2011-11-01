@@ -46,6 +46,7 @@ garm.app.Constants.FLD_NAME      = 'name';
 garm.app.Constants.FLD_ABOUT     = 'aboutText';
 garm.app.Constants.FLD_CREDITS   = 'creditsText';
 garm.app.Constants.FLD_CONTACTS  = 'contactsText';
+garm.app.Constants.FLD_COUNTRY_DRAPES = 'countryDrapes';
 garm.app.Constants.FLD_IMAGE_PREVIEW_URL = 'imagePreviewUrl';
 garm.app.Constants.FLD_IMAGE_URL         = 'imageUrl';
 garm.app.Constants.FLD_IMAGE_CLR         = 'imageColor';
@@ -55,6 +56,11 @@ garm.app.Constants.IMAGE_HEIGHT = 768;
 
 garm.app.Constants.IMAGE_PREVIEW_WIDTH  = 48;
 garm.app.Constants.IMAGE_PREVIEW_HEIGHT = 36;
+
+garm.app.Constants.COUNTRY_DRAPES_WIDTH  = 256;
+garm.app.Constants.COUNTRY_DRAPES_HEIGHT = 192;
+garm.app.Constants.COUNTRY_DRAPES_CROP_WIDTH_COUNT  = 5;
+garm.app.Constants.COUNTRY_DRAPES_CROP_HEIGHT_COUNT = 4;
 
 garm.app.Constants.STORE_META = (function() {
 
@@ -90,11 +96,12 @@ garm.app.Constants.TOPIC_REN_ITEM = 'garm.app.Constants.topicRenItem';
 garm.app.Constants.TOPIC_DEL_ITEM = 'garm.app.Constants.topicDelItem';
 garm.app.Constants.TOPIC_UPD_ITEM = 'garm.app.Constants.topicUpdItem';
 
-garm.app.Constants.TOPIC_ADD_CONTINENT = 'garm.app.Constants.topicAddContinent';
-garm.app.Constants.TOPIC_ADD_COUNTRY   = 'garm.app.Constants.topicAddCountry';
-garm.app.Constants.TOPIC_ADD_IMAGE     = 'garm.app.Constants.topicAddImage';
-garm.app.Constants.TOPIC_CHA_IMAGE     = 'garm.app.Constants.topicChaImage';
-garm.app.Constants.TOPIC_CHA_PREVIEW   = 'garm.app.Constants.topicChaPreview';
+garm.app.Constants.TOPIC_ADD_CONTINENT      = 'garm.app.Constants.topicAddContinent';
+garm.app.Constants.TOPIC_ADD_COUNTRY        = 'garm.app.Constants.topicAddCountry';
+garm.app.Constants.TOPIC_CHA_COUNTRY_DRAPES = 'garm.app.Constants.TOPIC_CHA_COUNTRY_DRAPES';
+garm.app.Constants.TOPIC_ADD_IMAGE          = 'garm.app.Constants.topicAddImage';
+garm.app.Constants.TOPIC_CHA_IMAGE          = 'garm.app.Constants.topicChaImage';
+garm.app.Constants.TOPIC_CHA_PREVIEW        = 'garm.app.Constants.topicChaPreview';
 
 garm.app.Constants.TOPIC_SHOW_MESSAGE = 'garm.app.Constants.topicShowMessage';
 garm.app.Constants.TOPIC_SHOW_SUCCESS = 'garm.app.Constants.topicShowSuccess';
@@ -211,6 +218,11 @@ garm.app.Constants.PREPARE_ITEM_MENU_VALUES = function(item) {
     result[garm.app.Constants.TYPE_COUNTRY] = [
         //editItem,
         renameItem,
+        { label : 'Change Drapes',
+          topic : garm.app.Constants.TOPIC_CHA_COUNTRY_DRAPES,
+          iconClass: "dijitIcon dijitLeaf",
+          item  : item
+        },
         separator,
         deleteItem,
         separator,
