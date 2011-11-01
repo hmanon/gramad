@@ -132,15 +132,15 @@ function cropImage(&$image, $request) {
         return;
     }
     list($width, $height) = getimagesize($image['url']);
-    for($w = 0; $w < $cropWidthCount; ++$w) {
-        for($h = 0; $h < $cropHeightCount; ++$h) {
+    for($h = 0; $h < $cropHeightCount; ++$h) {
+        for($w = 0; $w < $cropWidthCount; ++$w) {
             $zebraImage = new Zebra_Image();
             $zebraImage->source_path = $image['url'];
             $zebraImage->target_path = 
             	dirname($image['url'])
               . DIRECTORY_SEPARATOR
               . basename($image['url'], '.'.pathinfo($image['url'], PATHINFO_EXTENSION))
-              . "_$w_{$h}"
+              . "_{$w}_{$h}"
               . '.'.pathinfo($image['url'], PATHINFO_EXTENSION)
               ;
             $zebraImage->jpeg_quality = 100;
@@ -155,10 +155,10 @@ function cropImage(&$image, $request) {
             if (!array_key_exists('crop', $image)) {
                 $image['crop'] = array();
             }
-            if (!array_key_exists($w, $image['crop'])) {
-                $image['crop'][$w] = array();
+            if (!array_key_exists($h, $image['crop'])) {
+                $image['crop'][$h] = array();
             }
-            $image['crop'][$w][$h] = array(
+            $image['crop'][$h][$w] = array(
                 'url' => $zebraImage->target_path
             );
         }
