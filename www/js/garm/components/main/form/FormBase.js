@@ -27,7 +27,9 @@ dojo.declare('garm.components.main.form.FormBase', dijit.form.Form, {
             dropDown : this.menu
         }).placeAt(this.domNode);
 
-        this.contentNode = dojo.create('div', null, this.domNode);
+        this.contentNode = dojo.create('div', {
+            style : 'width: 100%; height: 100%; overflow: auto;'
+        }, this.domNode);
     },
 
 

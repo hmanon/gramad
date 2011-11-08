@@ -37,8 +37,6 @@ dojo.declare('garm.components.main.form.FormImage', garm.components.main.form.Fo
                 + '<div dojoType="dojox.widget.ColorPicker"'
                  + ' name="' + garm.app.Constants.FLD_IMAGE_CLR + '"'
                  + ' animatePoint="false"'
-                 + ' showHsv="false"'
-                 + ' showRgb="false"'
                  + ' value="' + bgColor + '"'
                  + '>'
                  + '</div>'
