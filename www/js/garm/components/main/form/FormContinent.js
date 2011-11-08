@@ -13,13 +13,10 @@ dojo.declare('garm.components.main.form.FormContinent', garm.components.main.for
 
         this.inherited(arguments);
         this.setContent(
-            '<input type="file" name="imageURL[]" id="imageURL" multiple=""/>',
+            '<div/>',
             {   parseContent: true,
                 onBegin : function() {
-
-                    dojo.require('dijit.form.SimpleTextarea');
-                    this.inherited("onBegin", arguments);
-                  }
+                }
             }
         );
     }
