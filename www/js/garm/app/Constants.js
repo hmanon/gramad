@@ -46,16 +46,35 @@ garm.app.Constants.FLD_NAME      = 'name';
 garm.app.Constants.FLD_ABOUT     = 'aboutText';
 garm.app.Constants.FLD_CREDITS   = 'creditsText';
 garm.app.Constants.FLD_CONTACTS  = 'contactsText';
-garm.app.Constants.FLD_COUNTRY_DRAPES = 'countryDrapes';
+garm.app.Constants.FLD_CONTINENT_IMAGE_URL = 'continentImageUrl';
+garm.app.Constants.FLD_CONTINENT_SOUND_URL = 'continentSoundUrl';
+garm.app.Constants.FLD_CONTINENT_SITE_CLR  = 'continentSiteColor';
+garm.app.Constants.FLD_CONTINENT_PAGE_CLR  = 'continentPageColor';
+garm.app.Constants.FLD_CONTINENT_HEAD_CLR  = 'continentHeadColor';
+garm.app.Constants.FLD_COUNTRY_DRAPES    = 'countryDrapes';
+garm.app.Constants.FLD_COUNTRY_SOUND_URL = 'countrySoundUrl';
+garm.app.Constants.FLD_COUNTRY_SITE_CLR  = 'countrySiteColor';
+garm.app.Constants.FLD_COUNTRY_PAGE_CLR  = 'countryPageColor';
+garm.app.Constants.FLD_COUNTRY_HEAD_CLR  = 'countryHeadColor';
 garm.app.Constants.FLD_IMAGE_PREVIEW_URL = 'imagePreviewUrl';
+garm.app.Constants.FLD_IMAGE_FULL_URL    = 'imageFullUrl';
 garm.app.Constants.FLD_IMAGE_URL         = 'imageUrl';
-garm.app.Constants.FLD_IMAGE_CLR         = 'imageColor';
+garm.app.Constants.FLD_IMAGE_SITE_CLR    = 'imageSiteColor';
+garm.app.Constants.FLD_IMAGE_PAGE_CLR    = 'imagePageColor';
+garm.app.Constants.FLD_IMAGE_HEAD_CLR    = 'imageHeadColor';
 
-garm.app.Constants.IMAGE_WIDTH  = 1024;
-garm.app.Constants.IMAGE_HEIGHT = 768;
+garm.app.Constants.DEF_SITE_CLR = '#BEBEBE';
+garm.app.Constants.DEF_PAGE_CLR = '#FFFFFF';
+garm.app.Constants.DEF_HEAD_CLR = '#FF6004';
+
+garm.app.Constants.IMAGE_WIDTH  = 768;
+garm.app.Constants.IMAGE_HEIGHT = 576;
 
 garm.app.Constants.IMAGE_PREVIEW_WIDTH  = 48;
 garm.app.Constants.IMAGE_PREVIEW_HEIGHT = 36;
+
+garm.app.Constants.IMAGE_FULL_WIDTH  = 1024;
+garm.app.Constants.IMAGE_FULL_HEIGHT = 768;
 
 garm.app.Constants.COUNTRY_DRAPES_WIDTH  = 256;
 garm.app.Constants.COUNTRY_DRAPES_HEIGHT = 192;
@@ -96,12 +115,14 @@ garm.app.Constants.TOPIC_REN_ITEM = 'garm.app.Constants.topicRenItem';
 garm.app.Constants.TOPIC_DEL_ITEM = 'garm.app.Constants.topicDelItem';
 garm.app.Constants.TOPIC_UPD_ITEM = 'garm.app.Constants.topicUpdItem';
 
-garm.app.Constants.TOPIC_ADD_CONTINENT      = 'garm.app.Constants.topicAddContinent';
-garm.app.Constants.TOPIC_ADD_COUNTRY        = 'garm.app.Constants.topicAddCountry';
-garm.app.Constants.TOPIC_CHA_COUNTRY_DRAPES = 'garm.app.Constants.TOPIC_CHA_COUNTRY_DRAPES';
-garm.app.Constants.TOPIC_ADD_IMAGE          = 'garm.app.Constants.topicAddImage';
-garm.app.Constants.TOPIC_CHA_IMAGE          = 'garm.app.Constants.topicChaImage';
-garm.app.Constants.TOPIC_CHA_PREVIEW        = 'garm.app.Constants.topicChaPreview';
+garm.app.Constants.TOPIC_ADD_CONTINENT       = 'garm.app.Constants.topicAddContinent';
+garm.app.Constants.TOPIC_CHA_CONTINENT_IMAGE = 'garm.app.Constants.topicChaContinentImage';
+garm.app.Constants.TOPIC_ADD_COUNTRY         = 'garm.app.Constants.topicAddCountry';
+garm.app.Constants.TOPIC_CHA_COUNTRY_DRAPES  = 'garm.app.Constants.TOPIC_CHA_COUNTRY_DRAPES';
+garm.app.Constants.TOPIC_ADD_IMAGE           = 'garm.app.Constants.topicAddImage';
+garm.app.Constants.TOPIC_CHA_IMAGE           = 'garm.app.Constants.topicChaImage';
+garm.app.Constants.TOPIC_CHA_PREVIEW         = 'garm.app.Constants.topicChaPreview';
+garm.app.Constants.TOPIC_CHA_FULL            = 'garm.app.Constants.topicChaFull';
 
 garm.app.Constants.TOPIC_SHOW_MESSAGE = 'garm.app.Constants.topicShowMessage';
 garm.app.Constants.TOPIC_SHOW_SUCCESS = 'garm.app.Constants.topicShowSuccess';
@@ -209,6 +230,11 @@ garm.app.Constants.PREPARE_ITEM_MENU_VALUES = function(item) {
         separator,
         deleteItem,
         separator,
+        { label : 'Change Image',
+          topic : garm.app.Constants.TOPIC_CHA_CONTINENT_IMAGE,
+          iconClass: "dijitIcon dijitIconFile",
+          item  : item
+        },
         { label : 'Add Country',
           topic : garm.app.Constants.TOPIC_ADD_COUNTRY,
           iconClass: "dijitIcon dijitLeaf",
@@ -235,13 +261,18 @@ garm.app.Constants.PREPARE_ITEM_MENU_VALUES = function(item) {
     result[garm.app.Constants.TYPE_IMAGE] = [
         //editItem,
         renameItem,
-        { label : 'Change Preview',
+        { label : 'Change Preview Image',
           topic : garm.app.Constants.TOPIC_CHA_PREVIEW,
           iconClass: "dijitIcon dijitIconFile",
           item  : item
         },
-        { label : 'Change Image',
+        { label : 'Change Normal Image',
           topic : garm.app.Constants.TOPIC_CHA_IMAGE,
+          iconClass: "dijitIcon dijitIconFile",
+          item  : item
+        },
+        { label : 'Change Fullscreen Image',
+          topic : garm.app.Constants.TOPIC_CHA_FULL,
           iconClass: "dijitIcon dijitIconFile",
           item  : item
         },

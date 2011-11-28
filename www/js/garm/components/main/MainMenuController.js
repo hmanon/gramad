@@ -12,7 +12,7 @@ dojo.declare('garm.components.main.MainMenuController', null, {
 
 
     constructor : function(parent) {
-
+/*
         var menu = new dijit.Menu({
             style: "display: none;"
         });
@@ -57,8 +57,8 @@ dojo.declare('garm.components.main.MainMenuController', null, {
             label: "Menu",
             dropDown: menu
         }).placeAt(parent.domNode);
-
-        dojo.create('br', null, parent.domNode);
+*/
+        //dojo.create('br', null, parent.domNode);
         this._selectedForkLabel = dojo.create('label', null, parent.domNode);
         dojo.create('br', null, parent.domNode);
         this._switchedForkLabel = dojo.create('label', null, parent.domNode);

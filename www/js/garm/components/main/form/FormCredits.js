@@ -13,7 +13,7 @@ dojo.declare('garm.components.main.form.FormCredits', garm.components.main.form.
 
         this.inherited(arguments);
         this.setContent(
-            '<table style="height:100%; width:100%; padding:10px">'
+            '<table style="height:80%; width:100%; padding:10px">'
             + '<tr><td style="height:auto; width:100%;"><label for="' + garm.app.Constants.FLD_CREDITS + '">Text:</label></td></tr>'
             + '<tr><td style="height:100%; width:100%;">'
                 + '<input type="text" dojoType="dijit.form.SimpleTextarea"'

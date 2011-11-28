@@ -26,23 +26,53 @@ dojo.declare('garm.components.main.form.FormImage', garm.components.main.form.Fo
                        ? item[garm.app.Constants.FLD_IMAGE_PREVIEW_URL]
                        : garm.app.Constants.IMG_EMPTY
                        ;
-        var bgColor = item[garm.app.Constants.FLD_IMAGE_CLR]
-                    ? item[garm.app.Constants.FLD_IMAGE_CLR][0]
-                    : '#000000'
+        var fullUrl = item[garm.app.Constants.FLD_IMAGE_FULL_URL]
+                    ? item[garm.app.Constants.FLD_IMAGE_FULL_URL]
+                    : garm.app.Constants.IMG_EMPTY
                     ;
+        var siteColor = item[garm.app.Constants.FLD_IMAGE_SITE_CLR]
+                      ? item[garm.app.Constants.FLD_IMAGE_SITE_CLR][0]
+                      : garm.app.Constants.DEF_SITE_CLR
+                      ;
+        var pageColor = item[garm.app.Constants.FLD_IMAGE_PAGE_CLR]
+                      ? item[garm.app.Constants.FLD_IMAGE_PAGE_CLR][0]
+                      : garm.app.Constants.DEF_PAGE_CLR
+                      ;
+        var headColor = item[garm.app.Constants.FLD_IMAGE_HEAD_CLR]
+                      ? item[garm.app.Constants.FLD_IMAGE_HEAD_CLR][0]
+                      : garm.app.Constants.DEF_HEAD_CLR
+                      ;
         this.setContent(
             '<table style="height:auto; width:100%; padding:10px">'
             + '<tr><td style="height:auto; width:100%;">'
-              + '<label>Background color:</label>'
-                + '<div dojoType="dojox.widget.ColorPicker"'
-                 + ' name="' + garm.app.Constants.FLD_IMAGE_CLR + '"'
-                 + ' animatePoint="false"'
-                 + ' value="' + bgColor + '"'
-                 + '>'
-                 + '</div>'
+              + '<label>Site color:</label>'
+              + '<div dojoType="dojox.widget.ColorPicker"'
+                + ' name="' + garm.app.Constants.FLD_IMAGE_SITE_CLR + '"'
+                + ' animatePoint="false"'
+                + ' value="' + siteColor + '"'
+                + '>'
+                + '</div>'
             + '</td></tr>'
             + '<tr><td style="height:auto; width:100%;">'
-              + '<label>Preview:</label>'
+              + '<label>Page color:</label>'
+              + '<div dojoType="dojox.widget.ColorPicker"'
+                + ' name="' + garm.app.Constants.FLD_IMAGE_PAGE_CLR + '"'
+                + ' animatePoint="false"'
+                + ' value="' + pageColor + '"'
+                + '>'
+                + '</div>'
+            + '</td></tr>'
+            + '<tr><td style="height:auto; width:100%;">'
+              + '<label>Head color:</label>'
+              + '<div dojoType="dojox.widget.ColorPicker"'
+                + ' name="' + garm.app.Constants.FLD_IMAGE_HEAD_CLR + '"'
+                + ' animatePoint="false"'
+                + ' value="' + headColor + '"'
+                + '>'
+                + '</div>'
+            + '</td></tr>'
+            + '<tr><td style="height:auto; width:100%;">'
+              + '<label>Preview Image:</label>'
               + '<br>'
               + '<img'
                 + ' style="width: ' + garm.app.Constants.IMAGE_PREVIEW_WIDTH + 'px; height: ' + garm.app.Constants.IMAGE_PREVIEW_HEIGHT + 'px;"'
@@ -52,16 +82,26 @@ dojo.declare('garm.components.main.form.FormImage', garm.components.main.form.Fo
                 + '/>'
             + '</td></tr>'
             + '<tr><td style="height:auto; width:100%;">'
-              + '<label>Full size:</label>'
+              + '<label>Normal Image:</label>'
               + '<br>'
               + '<img'
-                + ' style="width: ' + garm.app.Constants.IMAGE_WIDTH / 2 + 'px; height: ' + garm.app.Constants.IMAGE_HEIGHT / 2 + 'px;"'
+                + ' style="width: ' + garm.app.Constants.IMAGE_WIDTH / 3 + 'px; height: ' + garm.app.Constants.IMAGE_HEIGHT / 3 + 'px;"'
                 + ' src="' + imageUrl +'"'
                 + ' alt="' + imageUrl +'"'
                 + ' title="' + item[garm.app.Constants.FLD_NAME] +'"'
                 + '/>'
             + '</td></tr>'
-            + '</table>',
+            + '<tr><td style="height:auto; width:100%;">'
+            + '<label>Fullscreen Image:</label>'
+              + '<br>'
+              + '<img'
+                + ' style="width: ' + garm.app.Constants.IMAGE_FULL_WIDTH / 3 + 'px; height: ' + garm.app.Constants.IMAGE_FULL_HEIGHT / 3 + 'px;"'
+                + ' src="' + fullUrl +'"'
+                + ' alt="' + fullUrl +'"'
+                + ' title="' + item[garm.app.Constants.FLD_NAME] +'"'
+                + '/>'
+            + '</td></tr>'
+          + '</table>',
             {   parseContent: true,
                 onBegin : function() {
                     dojo.require("dijit.form.DropDownButton");

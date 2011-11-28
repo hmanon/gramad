@@ -41,11 +41,13 @@ dojo.declare('garm.components.main.MainController', null, {
         dojo.subscribe(garm.app.Constants.TOPIC_DEL_ITEM, this, this._deleteItem);
 
         dojo.subscribe(garm.app.Constants.TOPIC_ADD_CONTINENT, this, this._addContinent);
+        dojo.subscribe(garm.app.Constants.TOPIC_CHA_CONTINENT_IMAGE, this, this._changeContinentImage);
         dojo.subscribe(garm.app.Constants.TOPIC_ADD_COUNTRY, this, this._addCountry);
         dojo.subscribe(garm.app.Constants.TOPIC_CHA_COUNTRY_DRAPES, this, this._changeCountryDrapes);
         dojo.subscribe(garm.app.Constants.TOPIC_ADD_IMAGE, this, this._addImage);
         dojo.subscribe(garm.app.Constants.TOPIC_CHA_IMAGE, this, this._changeImage);
         dojo.subscribe(garm.app.Constants.TOPIC_CHA_PREVIEW, this, this._changePreview);
+        dojo.subscribe(garm.app.Constants.TOPIC_CHA_FULL, this, this._changeFull);
 
         dojo.subscribe(garm.app.Constants.TOPIC_LOAD_DATA, this, this._loadData);
         dojo.subscribe(garm.app.Constants.TOPIC_SAVE_DATA, this, this._saveData);
@@ -181,6 +183,16 @@ dojo.declare('garm.components.main.MainController', null, {
     },
 
 
+    _changeContinentImage : function(item) {
+        var responseMap = {};
+        responseMap[garm.app.Constants.FLD_CONTINENT_IMAGE_URL] = 'url';
+        this._doChangeImage(item, responseMap, {
+            resizeWidth  : garm.app.Constants.IMAGE_WIDTH,
+            resizeHeight : garm.app.Constants.IMAGE_HEIGHT
+        });
+    },
+
+
     _changeImage : function(item) {
         var responseMap = {};
         responseMap[garm.app.Constants.FLD_IMAGE_URL] = 'url';
@@ -197,6 +209,16 @@ dojo.declare('garm.components.main.MainController', null, {
         this._doChangeImage(item, responseMap, {
             resizeWidth  : garm.app.Constants.IMAGE_PREVIEW_WIDTH,
             resizeHeight : garm.app.Constants.IMAGE_PREVIEW_HEIGHT
+        });
+    },
+
+
+    _changeFull : function(item) {
+        var responseMap = {};
+        responseMap[garm.app.Constants.FLD_IMAGE_FULL_URL] = 'url';
+        this._doChangeImage(item, responseMap, {
+            resizeWidth  : garm.app.Constants.IMAGE_FULL_WIDTH,
+            resizeHeight : garm.app.Constants.IMAGE_FULL_HEIGHT
         });
     },
 
