@@ -69,7 +69,7 @@ dojo.declare('garm.app.AppController', null, {
 
         var askFork = dojo.hitch(this, function(forks) {
             garm.components.popup.PopUpFactory.getInstance().askOptions({
-                title : 'Switch Version',
+                title : 'Activate Version',
                 options : forks,
                 onOk : dojo.hitch(this, function(result) {
                     this._switchFork(result.value.option);

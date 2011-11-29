@@ -47,21 +47,16 @@ garm.app.Constants.FLD_ABOUT     = 'aboutText';
 garm.app.Constants.FLD_CREDITS   = 'creditsText';
 garm.app.Constants.FLD_CONTACTS  = 'contactsText';
 garm.app.Constants.FLD_CONTINENT_IMAGE_URL = 'continentImageUrl';
-garm.app.Constants.FLD_CONTINENT_SOUND_URL = 'continentSoundUrl';
-garm.app.Constants.FLD_CONTINENT_SITE_CLR  = 'continentSiteColor';
-garm.app.Constants.FLD_CONTINENT_PAGE_CLR  = 'continentPageColor';
-garm.app.Constants.FLD_CONTINENT_HEAD_CLR  = 'continentHeadColor';
 garm.app.Constants.FLD_COUNTRY_DRAPES    = 'countryDrapes';
-garm.app.Constants.FLD_COUNTRY_SOUND_URL = 'countrySoundUrl';
-garm.app.Constants.FLD_COUNTRY_SITE_CLR  = 'countrySiteColor';
-garm.app.Constants.FLD_COUNTRY_PAGE_CLR  = 'countryPageColor';
-garm.app.Constants.FLD_COUNTRY_HEAD_CLR  = 'countryHeadColor';
 garm.app.Constants.FLD_IMAGE_PREVIEW_URL = 'imagePreviewUrl';
 garm.app.Constants.FLD_IMAGE_FULL_URL    = 'imageFullUrl';
 garm.app.Constants.FLD_IMAGE_URL         = 'imageUrl';
-garm.app.Constants.FLD_IMAGE_SITE_CLR    = 'imageSiteColor';
-garm.app.Constants.FLD_IMAGE_PAGE_CLR    = 'imagePageColor';
-garm.app.Constants.FLD_IMAGE_HEAD_CLR    = 'imageHeadColor';
+
+garm.app.Constants.FLD_SOUND_URL = 'soundUrl';
+
+garm.app.Constants.FLD_SITE_CLR  = 'siteColor';
+garm.app.Constants.FLD_PAGE_CLR  = 'pageColor';
+garm.app.Constants.FLD_HEAD_CLR  = 'headColor';
 
 garm.app.Constants.DEF_SITE_CLR = '#BEBEBE';
 garm.app.Constants.DEF_PAGE_CLR = '#FFFFFF';
@@ -200,7 +195,7 @@ garm.app.Constants.PREPARE_ITEM_MENU_VALUES = function(item) {
           iconClass: "dijitIcon dijitIconUndo",
           item  : item
         },
-        { label : 'Switch Version',
+        { label : 'Activate Version',
           topic : garm.app.Constants.TOPIC_FORK_SWITCH,
           iconClass: "dijitIcon dijitIconUndo",
           item  : item
