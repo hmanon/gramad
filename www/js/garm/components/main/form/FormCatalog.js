@@ -17,6 +17,10 @@ dojo.declare('garm.components.main.form.FormCatalog', garm.components.main.form.
             '<div/>',
             {   parseContent: true,
                 onBegin : function() {
+                    dojo.require('dijit.form.DropDownButton');
+                    dojo.require('dojox.widget.ColorPicker');
+                    dojo.require('dijit.form.SimpleTextarea');
+                    this.inherited('onBegin', arguments);
                 }
             }
         );

@@ -48,6 +48,7 @@ dojo.declare('garm.components.main.MainController', null, {
         dojo.subscribe(garm.app.Constants.TOPIC_CHA_IMAGE, this, this._changeImage);
         dojo.subscribe(garm.app.Constants.TOPIC_CHA_PREVIEW, this, this._changePreview);
         dojo.subscribe(garm.app.Constants.TOPIC_CHA_FULL, this, this._changeFull);
+        dojo.subscribe(garm.app.Constants.TOPIC_CHA_SOUND, this, this._changeSound);
 
         dojo.subscribe(garm.app.Constants.TOPIC_LOAD_DATA, this, this._loadData);
         dojo.subscribe(garm.app.Constants.TOPIC_SAVE_DATA, this, this._saveData);
@@ -161,11 +162,13 @@ dojo.declare('garm.components.main.MainController', null, {
     _changeCountryDrapes : function(item) {
         var responseMap = {};
         responseMap[garm.app.Constants.FLD_COUNTRY_DRAPES] = 'crop';
-        this._doChangeImage(item, responseMap, {
+        this._doChangeFileField(item, responseMap, {
             resizeWidth     : garm.app.Constants.COUNTRY_DRAPES_WIDTH,
             resizeHeight    : garm.app.Constants.COUNTRY_DRAPES_HEIGHT,
             cropWidthCount  : garm.app.Constants.COUNTRY_DRAPES_CROP_WIDTH_COUNT,
             cropHeightCount : garm.app.Constants.COUNTRY_DRAPES_CROP_HEIGHT_COUNT
+        }, {
+            url : garm.app.Constants.IMAGE_POST_URL
         });
     },
 
@@ -178,6 +181,8 @@ dojo.declare('garm.components.main.MainController', null, {
             }, garm.app.Constants.FLD_IMAGE_URL, {
                 resizeWidth  : garm.app.Constants.IMAGE_WIDTH,
                 resizeHeight : garm.app.Constants.IMAGE_HEIGHT
+            }, {
+                url : garm.app.Constants.IMAGE_POST_URL
             }
         );
     },
@@ -186,9 +191,11 @@ dojo.declare('garm.components.main.MainController', null, {
     _changeContinentImage : function(item) {
         var responseMap = {};
         responseMap[garm.app.Constants.FLD_CONTINENT_IMAGE_URL] = 'url';
-        this._doChangeImage(item, responseMap, {
+        this._doChangeFileField(item, responseMap, {
             resizeWidth  : garm.app.Constants.IMAGE_WIDTH,
             resizeHeight : garm.app.Constants.IMAGE_HEIGHT
+        }, {
+            url : garm.app.Constants.IMAGE_POST_URL
         });
     },
 
@@ -196,9 +203,11 @@ dojo.declare('garm.components.main.MainController', null, {
     _changeImage : function(item) {
         var responseMap = {};
         responseMap[garm.app.Constants.FLD_IMAGE_URL] = 'url';
-        this._doChangeImage(item, responseMap, {
+        this._doChangeFileField(item, responseMap, {
             resizeWidth  : garm.app.Constants.IMAGE_WIDTH,
             resizeHeight : garm.app.Constants.IMAGE_HEIGHT
+        }, {
+            url : garm.app.Constants.IMAGE_POST_URL
         });
     },
 
@@ -206,9 +215,11 @@ dojo.declare('garm.components.main.MainController', null, {
     _changePreview : function(item) {
         var responseMap = {};
         responseMap[garm.app.Constants.FLD_IMAGE_PREVIEW_URL] = 'url';
-        this._doChangeImage(item, responseMap, {
+        this._doChangeFileField(item, responseMap, {
             resizeWidth  : garm.app.Constants.IMAGE_PREVIEW_WIDTH,
             resizeHeight : garm.app.Constants.IMAGE_PREVIEW_HEIGHT
+        }, {
+            url : garm.app.Constants.IMAGE_POST_URL
         });
     },
 
@@ -216,9 +227,20 @@ dojo.declare('garm.components.main.MainController', null, {
     _changeFull : function(item) {
         var responseMap = {};
         responseMap[garm.app.Constants.FLD_IMAGE_FULL_URL] = 'url';
-        this._doChangeImage(item, responseMap, {
+        this._doChangeFileField(item, responseMap, {
             resizeWidth  : garm.app.Constants.IMAGE_FULL_WIDTH,
             resizeHeight : garm.app.Constants.IMAGE_FULL_HEIGHT
+        }, {
+            url : garm.app.Constants.IMAGE_POST_URL
+        });
+    },
+
+
+    _changeSound : function(item) {
+        var responseMap = {};
+        responseMap[garm.app.Constants.FLD_SOUND_URL] = 'url';
+        this._doChangeFileField(item, responseMap, {}, {
+            url : garm.app.Constants.SOUND_POST_URL
         });
     },
 
@@ -344,7 +366,7 @@ dojo.declare('garm.components.main.MainController', null, {
     },
 
 
-    _doAddImage : function(parentItem, keywordArgs, field, imageParams) {
+    _doAddImage : function(parentItem, keywordArgs, field, imageParams, uploadParams) {
 
         var onUpload = dojo.hitch(this, function(response, ioArgs) {
 
@@ -381,14 +403,13 @@ dojo.declare('garm.components.main.MainController', null, {
 
         var onFileSelect = dojo.hitch(this, function(result) {
             if (result.form.isValid()) {
-                var deferred = dojo.io.iframe.send({
+                var deferred = dojo.io.iframe.send(dojo.mixin({
                     form     : result.form.domNode,
-                    url      : garm.app.Constants.IMAGE_POST_URL,
                     method   : 'post',
                     handleAs : 'json',
                     error    : dojo.hitch(this, this._showError),
                     load     : onUpload
-                });
+                }, uploadParams));
                 garm.components.popup.PopUpFactory.getInstance().progress({
                     deferred : deferred,
                     title : 'Upload Image(s)'
@@ -410,7 +431,7 @@ dojo.declare('garm.components.main.MainController', null, {
     },
 
 
-    _doChangeImage : function(item, responseMap, imageParams) {
+    _doChangeFileField : function(item, responseMap, fileParams, uploadParams) {
 
         var onUpload = dojo.hitch(this, function(response, ioArgs) {
 
@@ -448,26 +469,25 @@ dojo.declare('garm.components.main.MainController', null, {
 
         var onFileSelect = dojo.hitch(this, function(result) {
             if (result.form.isValid()) {
-                var deferred = dojo.io.iframe.send({
+                var deferred = dojo.io.iframe.send(dojo.mixin({
                     form     : result.form.domNode,
-                    url      : garm.app.Constants.IMAGE_POST_URL,
                     method   : 'post',
                     handleAs : 'json',
                     error    : dojo.hitch(this, this._showError),
                     load     : onUpload
-                });
+                }, uploadParams));
                 garm.components.popup.PopUpFactory.getInstance().progress({
                     deferred : deferred,
-                    title : 'Upload Image(s)'
+                    title : 'Upload File(s)'
                 });
             }
         });
 
         garm.components.popup.PopUpFactory.getInstance().askForFiles(dojo.mixin({
-            title : 'Upload image',
+            title : 'Upload File(s)',
             multiple : false,
             maxFileSize : 10 * 1024 * 1024,
             onOk : onFileSelect
-        }, imageParams));
+        }, fileParams));
     }
 });

@@ -69,10 +69,22 @@ function treat_getForks($request) {
 }
 
 
+function treat_postSound($files, $request) {
+    try {
+        $sounds = $files['fileURL'];
+        $sounds = treatFiles($sounds, $request, SOUND_PATH, SOUND_PREFIX);
+        return json_encode((object)$sounds);
+    }
+    catch(Exception $e) {
+        throw $e;
+    }
+}
+
+
 function treat_postImage($files, $request) {
     try {
-        $images = $files['imageURL'];
-        $images = treatImages ($images, $request);
+        $images = $files['fileURL'];
+        $images = treatFiles  ($images, $request, IMAGE_PATH, IMAGE_PREFIX);
         $images = resizeImages($images, $request);
         $images = cropImages  ($images, $request);
         return json_encode((object)$images);
@@ -185,7 +197,7 @@ function extractZebraError($zebraImage) {
 }
 
 
-function treatImages($files, $request) {
+function treatFiles($files, $request, $folder, $prefix) {
     static $errCodes = array(
         UPLOAD_ERR_OK         => 'There is no error, the file uploaded with success.',
         UPLOAD_ERR_INI_SIZE   => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
@@ -197,8 +209,6 @@ function treatImages($files, $request) {
         UPLOAD_ERR_EXTENSION  => 'A PHP extension stopped the file upload'
     );
     
-    $folder = IMAGE_PATH;
-
     if (empty($files)) {
         throw new Exception('Unknown error');
     }
@@ -222,7 +232,7 @@ function treatImages($files, $request) {
         switch ($error) {
 
             case UPLOAD_ERR_OK:
-                $path = newtempnam($folder, 'img', empty($extension) ? '' : ".$extension");
+                $path = newtempnam($folder, $prefix, empty($extension) ? '' : ".$extension");
                 if ($path === false) {
                     $response[$name]['status'] = 'Can`t create temporary file';
                 }

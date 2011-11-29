@@ -43,6 +43,10 @@ dojo.declare('garm.components.main.form.FormContinent', garm.components.main.for
                 garm.app.Constants.FLD_HEAD_CLR,
                 garm.app.Constants.DEF_HEAD_CLR
             ),
+            garm.components.main.form.FormUtil.PREPARE_SOUND(
+                'Sound', item,
+                garm.app.Constants.FLD_SOUND_URL
+            ),
             garm.components.main.form.FormUtil.PREPARE_IMAGE(
                 'Image', item,
                 garm.app.Constants.FLD_CONTINENT_IMAGE_URL,
@@ -60,9 +64,10 @@ dojo.declare('garm.components.main.form.FormContinent', garm.components.main.for
             content, {
             parseContent: true,
                 onBegin : function() {
-                    dojo.require("dijit.form.DropDownButton");
-                    dojo.require("dojox.widget.ColorPicker");
-                    this.inherited("onBegin", arguments);
+                    dojo.require('dijit.form.DropDownButton');
+                    dojo.require('dojox.widget.ColorPicker');
+                    dojo.require('dijit.form.SimpleTextarea');
+                    this.inherited('onBegin', arguments);
                 }
             }
         );

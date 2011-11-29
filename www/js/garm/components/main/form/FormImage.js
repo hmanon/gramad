@@ -64,9 +64,10 @@ dojo.declare('garm.components.main.form.FormImage', garm.components.main.form.Fo
             content, {
             parseContent: true,
                 onBegin : function() {
-                    dojo.require("dijit.form.DropDownButton");
-                    dojo.require("dojox.widget.ColorPicker");
-                    this.inherited("onBegin", arguments);
+                    dojo.require('dijit.form.DropDownButton');
+                    dojo.require('dojox.widget.ColorPicker');
+                    dojo.require('dijit.form.SimpleTextarea');
+                    this.inherited('onBegin', arguments);
                 }
             }
         );

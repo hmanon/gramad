@@ -55,3 +55,20 @@ garm.components.main.form.FormUtil.PREPARE_DRAPES = function(label, item, field,
     content += '</table>';
     return content;
 };
+
+
+garm.components.main.form.FormUtil.PREPARE_SOUND = function(label, item, field) {
+
+    var url = item[field]
+            ? item[field]
+            : ''
+            ;
+    return '<label>' + label + '</label>'
+         + '<br>'
+         + '<input type="text"'
+           + ' name="' + field + '"'
+           + ' value="' + url + '"'
+           + '>'
+           + '</input>'
+         ;
+};

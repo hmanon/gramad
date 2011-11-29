@@ -4,6 +4,7 @@ dojo.require("dijit.Menu");
 dojo.require("dijit.MenuItem");
 
 garm.app.Constants.IMAGE_POST_URL = 'postImage.php';
+garm.app.Constants.SOUND_POST_URL = 'postSound.php';
 
 garm.app.Constants.STORE_FORK_URL = 'getForks.php';
 
@@ -26,6 +27,7 @@ garm.app.Constants.STORE_STRUCT = {
 
 garm.app.Constants.IMG_LOADER = dojo.moduleUrl('dijit', 'icons/images/loadingAnimation_rtl.gif');
 garm.app.Constants.IMG_EMPTY  = dojo.moduleUrl('dijit', '../../../../assets/question.jpeg');
+garm.app.Constants.SND_EMPTY  = '';
 
 garm.app.Constants.TYPE_CONFIG    = 'config';
 garm.app.Constants.TYPE_ABOUT     = 'about';
@@ -118,6 +120,7 @@ garm.app.Constants.TOPIC_ADD_IMAGE           = 'garm.app.Constants.topicAddImage
 garm.app.Constants.TOPIC_CHA_IMAGE           = 'garm.app.Constants.topicChaImage';
 garm.app.Constants.TOPIC_CHA_PREVIEW         = 'garm.app.Constants.topicChaPreview';
 garm.app.Constants.TOPIC_CHA_FULL            = 'garm.app.Constants.topicChaFull';
+garm.app.Constants.TOPIC_CHA_SOUND           = 'garm.app.Constants.topicChaSound';
 
 garm.app.Constants.TOPIC_SHOW_MESSAGE = 'garm.app.Constants.topicShowMessage';
 garm.app.Constants.TOPIC_SHOW_SUCCESS = 'garm.app.Constants.topicShowSuccess';
@@ -169,6 +172,12 @@ garm.app.Constants.PREPARE_ITEM_MENU_VALUES = function(item) {
         label : 'Delete "' + itemLabel + '"',
         topic : garm.app.Constants.TOPIC_DEL_ITEM,
         iconClass: "dijitIcon dijitIconDelete",
+        item  : item
+    };
+    var changeSound = {
+        label : 'Change Sound',
+        topic : garm.app.Constants.TOPIC_CHA_SOUND,
+        iconClass: "dijitIcon dijitIconFile",
         item  : item
     };
     var result = {};
@@ -230,6 +239,8 @@ garm.app.Constants.PREPARE_ITEM_MENU_VALUES = function(item) {
           iconClass: "dijitIcon dijitIconFile",
           item  : item
         },
+        changeSound,
+        separator,
         { label : 'Add Country',
           topic : garm.app.Constants.TOPIC_ADD_COUNTRY,
           iconClass: "dijitIcon dijitLeaf",
@@ -244,6 +255,7 @@ garm.app.Constants.PREPARE_ITEM_MENU_VALUES = function(item) {
           iconClass: "dijitIcon dijitLeaf",
           item  : item
         },
+        changeSound,
         separator,
         deleteItem,
         separator,

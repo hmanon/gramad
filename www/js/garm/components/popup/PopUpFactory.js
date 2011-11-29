@@ -160,8 +160,8 @@ dojo.declare('garm.components.popup.PopUpFactory', null, {
                     : '')
             + '<input'
               + ' type="file"'
-              + ' name="imageURL[]"'
-              + ' id="imageURL"'
+              + ' name="fileURL[]"'
+              + ' id="fileURL"'
               + (params.multiple ? ' multiple="true"' : '')
               + ' />'
           + '</div>';

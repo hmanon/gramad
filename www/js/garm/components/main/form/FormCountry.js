@@ -35,6 +35,10 @@ dojo.declare('garm.components.main.form.FormCountry', garm.components.main.form.
                 garm.app.Constants.FLD_HEAD_CLR,
                 garm.app.Constants.DEF_HEAD_CLR
             ),
+            garm.components.main.form.FormUtil.PREPARE_SOUND(
+                'Sound', item,
+                garm.app.Constants.FLD_SOUND_URL
+            ),
             garm.components.main.form.FormUtil.PREPARE_DRAPES(
                 'Drapes', item,
                 garm.app.Constants.FLD_COUNTRY_DRAPES
@@ -51,9 +55,10 @@ dojo.declare('garm.components.main.form.FormCountry', garm.components.main.form.
             content, {
             parseContent: true,
                 onBegin : function() {
-                    dojo.require("dijit.form.DropDownButton");
-                    dojo.require("dojox.widget.ColorPicker");
-                    this.inherited("onBegin", arguments);
+                    dojo.require('dijit.form.DropDownButton');
+                    dojo.require('dojox.widget.ColorPicker');
+                    dojo.require('dijit.form.SimpleTextarea');
+                    this.inherited('onBegin', arguments);
                 }
             }
         );

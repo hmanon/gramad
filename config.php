@@ -12,6 +12,10 @@ define('DATAS_PATH', '../../forks');
 
 define('DATA_PATH',  '../fork');
 define('IMAGE_PATH', '../images');
+define('SOUND_PATH', '../sounds');
+
+define('IMAGE_PREFIX', 'img');
+define('SOUND_PREFIX', 'snd');
 
 define('DATA_DEFAULT', 'default');
 

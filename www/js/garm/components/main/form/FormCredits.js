@@ -27,10 +27,11 @@ dojo.declare('garm.components.main.form.FormCredits', garm.components.main.form.
             + '</table>',
             {   parseContent: true,
                 onBegin : function() {
-
+                    dojo.require('dijit.form.DropDownButton');
+                    dojo.require('dojox.widget.ColorPicker');
                     dojo.require('dijit.form.SimpleTextarea');
-                    this.inherited("onBegin", arguments);
-                  }
+                    this.inherited('onBegin', arguments);
+                }
             }
         );
     }
