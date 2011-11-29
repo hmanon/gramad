@@ -2,6 +2,7 @@ dojo.provide('garm.components.main.form.FormCatalog');
 
 dojo.require('garm.app.Constants');
 dojo.require('garm.components.main.form.FormBase');
+dojo.require('garm.components.main.form.FormUtil');
 
 dojo.require("dojo.html");
 
