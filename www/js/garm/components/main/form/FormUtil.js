@@ -1,16 +1,38 @@
 dojo.provide('garm.components.main.form.FormUtil');
+dojo.require('dijit.form.Button');
 
 
-garm.components.main.form.FormUtil.PREPARE_COLOR_PICKER = function(label, item, field, defValue) {
+garm.components.main.form.FormUtil.PREPARE_COLOR_PICKER = function(label, item, field, defValue, buttons) {
 
     var color = item[field] ? item[field][0] : defValue;
+    var pickerId = garm.util.UniqId.next();
     return '<label>' + label + '</label>'
+         + '<table><tr><td>'
          + '<div dojoType="dojox.widget.ColorPicker"'
+           + ' id="' + pickerId + '"'
            + ' name="' + field + '"'
            + ' animatePoint="false"'
+           + ' webSafe="false"'
            + ' value="' + color + '"'
            + '>'
          + '</div>'
+         + '</td><td>'
+         + (buttons && buttons['spreadLabel']
+           ?
+             ( '<button dojoType="dijit.form.Button">'
+               + buttons['spreadLabel']
+               + '<script type="dojo/method" data-dojo-event="onClick" data-dojo-args="evt">'
+                 + 'dojo.publish(\'' + garm.app.Constants.TOPIC_SPREAD_FIELD + '\', [{'
+                   + ' parentId: \'' + item['id'] + '\','
+                   + ' field: \'' + field + '\','
+                   + ' value: dijit.byId(\'' + pickerId + '\').get(\'value\')'
+                 + '}]);'
+               + '</script>'
+             + '</button>'
+             )
+           : ''
+           )
+         + '</td></tr></table>'
          ;
 };
 

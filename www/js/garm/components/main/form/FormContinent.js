@@ -31,17 +31,23 @@ dojo.declare('garm.components.main.form.FormContinent', garm.components.main.for
             garm.components.main.form.FormUtil.PREPARE_COLOR_PICKER(
                 'Site Color', item,
                 garm.app.Constants.FLD_SITE_CLR,
-                garm.app.Constants.DEF_SITE_CLR
+                garm.app.Constants.DEF_SITE_CLR, {
+                    spreadLabel : 'Apply to Countries and Images'
+                }
             ),
             garm.components.main.form.FormUtil.PREPARE_COLOR_PICKER(
                 'Page Color', item,
                 garm.app.Constants.FLD_PAGE_CLR,
-                garm.app.Constants.DEF_PAGE_CLR
+                garm.app.Constants.DEF_PAGE_CLR, {
+                    spreadLabel : 'Apply to Countries and Images'
+                }
             ),
             garm.components.main.form.FormUtil.PREPARE_COLOR_PICKER(
                 'Head Color', item,
                 garm.app.Constants.FLD_HEAD_CLR,
-                garm.app.Constants.DEF_HEAD_CLR
+                garm.app.Constants.DEF_HEAD_CLR, {
+                    spreadLabel : 'Apply to Countries and Images'
+                }
             ),
             garm.components.main.form.FormUtil.PREPARE_SOUND(
                 'Sound', item,

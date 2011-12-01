@@ -122,6 +122,8 @@ garm.app.Constants.TOPIC_CHA_PREVIEW         = 'garm.app.Constants.topicChaPrevi
 garm.app.Constants.TOPIC_CHA_FULL            = 'garm.app.Constants.topicChaFull';
 garm.app.Constants.TOPIC_CHA_SOUND           = 'garm.app.Constants.topicChaSound';
 
+garm.app.Constants.TOPIC_SPREAD_FIELD        = 'garm.app.Constants.TOPIC_SPREAD_FIELD';
+
 garm.app.Constants.TOPIC_SHOW_MESSAGE = 'garm.app.Constants.topicShowMessage';
 garm.app.Constants.TOPIC_SHOW_SUCCESS = 'garm.app.Constants.topicShowSuccess';
 garm.app.Constants.TOPIC_SHOW_ERROR   = 'garm.app.Constants.topicShowError';

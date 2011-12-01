@@ -67,6 +67,30 @@ dojo.declare('garm.components.main.MainStore', null, {
     },
 
 
+    setChildrenField : function(parent, field, value) {
+
+        var children = this.getChildren(parent);
+        dojo.forEach(children, dojo.hitch(this, function(child) {
+            this.setValue(child, field, value);
+            this.setChildrenField(child, field, value);
+        }));
+    },
+
+
+    setChildrenFieldById : function(parentId, field, value) {
+
+        this._store.fetchItemByIdentity({
+            identity : parentId,
+            onItem   : dojo.hitch(this, function(parent) {
+                this.setChildrenField(parent, field, value);
+            }),
+            onError : function(item) {
+
+            }
+        });
+    },
+
+
     getItemName : function(item) {
 
         return this._store.getLabel(item);

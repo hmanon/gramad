@@ -50,6 +50,8 @@ dojo.declare('garm.components.main.MainController', null, {
         dojo.subscribe(garm.app.Constants.TOPIC_CHA_FULL, this, this._changeFull);
         dojo.subscribe(garm.app.Constants.TOPIC_CHA_SOUND, this, this._changeSound);
 
+        dojo.subscribe(garm.app.Constants.TOPIC_SPREAD_FIELD, this, this._spreadField);
+
         dojo.subscribe(garm.app.Constants.TOPIC_LOAD_DATA, this, this._loadData);
         dojo.subscribe(garm.app.Constants.TOPIC_SAVE_DATA, this, this._saveData);
         dojo.subscribe(garm.app.Constants.TOPIC_FORK_CREATE, this, this._createFork);
@@ -156,6 +158,11 @@ dojo.declare('garm.components.main.MainController', null, {
             name : 'New Country',
             type : garm.app.Constants.TYPE_COUNTRY
         }, parentItem);
+    },
+
+
+    _spreadField : function(data) {
+        this._mainStore.setChildrenFieldById(data['parentId'], data['field'], data['value']);
     },
 
 

@@ -1,5 +1,7 @@
 dojo.provide('garm.components.popup.PopUpFactory');
 
+dojo.require('garm.util.UniqId');
+
 dojo.require('dijit.Dialog');
 dojo.require('dijit.form.Form');
 dojo.require('dijit.form.ValidationTextBox');
@@ -19,15 +21,6 @@ dojo.declare('garm.components.popup.PopUpFactory', null, {
 			}
 			return this._instance;
 		}
-	},
-
-
-	_counter : 0,
-
-
-	_prepareUninqId : function() {
-
-		return 'garm.components.popup.PopUpFactory.' + (++this._counter);
 	},
 
 
@@ -102,7 +95,7 @@ dojo.declare('garm.components.popup.PopUpFactory', null, {
         var options = params.options;
         var content = '';
         for(option in options) {
-            var optionId = this._prepareUninqId();
+            var optionId = garm.util.UniqId.next();
             content +=
                 '<br/>'
               + '<input'
@@ -206,8 +199,8 @@ dojo.declare('garm.components.popup.PopUpFactory', null, {
 
     create : function(params) {
 
-    	var id = this._prepareUninqId();
-    	var formId = this._prepareUninqId();
+    	var id = garm.util.UniqId.next();
+    	var formId = garm.util.UniqId.next();
 
     	var buttons = '';
 
