@@ -20,6 +20,14 @@ dojo.declare('garm.components.main.form.FormCountry', garm.components.main.form.
         this.inherited(arguments);
 
         var fields = [
+            garm.components.main.form.FormUtil.PREPARE_DRAPES(
+                'Drapes', item,
+                garm.app.Constants.FLD_COUNTRY_DRAPES
+            ),
+            garm.components.main.form.FormUtil.PREPARE_SOUND(
+                'Sound', item,
+                garm.app.Constants.FLD_SOUND_URL
+            ),
             garm.components.main.form.FormUtil.PREPARE_COLOR_PICKER(
                 'Site Color', item,
                 garm.app.Constants.FLD_SITE_CLR,
@@ -40,14 +48,6 @@ dojo.declare('garm.components.main.form.FormCountry', garm.components.main.form.
                 garm.app.Constants.DEF_HEAD_CLR, {
                     spreadLabel : 'Apply to Images'
                 }
-            ),
-            garm.components.main.form.FormUtil.PREPARE_SOUND(
-                'Sound', item,
-                garm.app.Constants.FLD_SOUND_URL
-            ),
-            garm.components.main.form.FormUtil.PREPARE_DRAPES(
-                'Drapes', item,
-                garm.app.Constants.FLD_COUNTRY_DRAPES
             )
         ];
 
