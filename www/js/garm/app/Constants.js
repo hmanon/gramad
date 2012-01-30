@@ -88,7 +88,7 @@ garm.app.Constants.STORE_META = (function() {
 
     meta[garm.app.Constants.TYPE_CONTINENT] = {};
     meta[garm.app.Constants.TYPE_CONTINENT]
-        [garm.app.Constants.TYPE_COUNTRY] = {min : 5, max : 5, defName : 'Country'};
+        [garm.app.Constants.TYPE_COUNTRY] = {min : 3, max : 3, defName : 'Country'};
 
     meta[garm.app.Constants.TYPE_CATALOG] = {};
     meta[garm.app.Constants.TYPE_CATALOG]
@@ -105,7 +105,8 @@ garm.app.Constants.TOPIC_FORK_CREATE = 'garm.app.Constants.topicForkCreate';
 garm.app.Constants.TOPIC_FORK_SELECT = 'garm.app.Constants.topicForkSelect';
 garm.app.Constants.TOPIC_FORK_SWITCH = 'garm.app.Constants.topicForkSwitch';
 
-garm.app.Constants.TOPIC_UPDATE_UI = 'garm.app.Constants.topicUpdateUI';
+garm.app.Constants.TOPIC_UPDATE_UI      = 'garm.app.Constants.topicUpdateUI';
+garm.app.Constants.TOPIC_UPDATE_FORM_UI = 'garm.app.Constants.topicUpdateFormUI';
 
 garm.app.Constants.TOPIC_EDT_ITEM = 'garm.app.Constants.topicEdtItem';
 garm.app.Constants.TOPIC_REN_ITEM = 'garm.app.Constants.topicRenItem';

@@ -24,7 +24,7 @@ dojo.declare('garm.components.main.form.FormController', null, {
     _forms : null,
 
     _lastForm : null,
-
+   
 
     constructor : function(parent) {
 
@@ -36,7 +36,10 @@ dojo.declare('garm.components.main.form.FormController', null, {
             garm.app.Constants.TOPIC_EDT_ITEM, this, this._onEditItem
         );
         dojo.subscribe(
-            garm.app.Constants.TOPIC_UPDATE_UI, this, this._updateUI
+            garm.app.Constants.TOPIC_UPDATE_UI, this, this._resetUI
+        );
+        dojo.subscribe(
+            garm.app.Constants.TOPIC_UPDATE_FORM_UI, this, this._updateUI
         );
     },
 
@@ -50,11 +53,20 @@ dojo.declare('garm.components.main.form.FormController', null, {
     },
 
 
-    _updateUI : function() {
+    _resetUI : function() {
 
         this._switchForm(garm.app.Constants.TYPE_NOTHING);
     },
 
+    
+    _updateUI : function() {
+
+    	if (   (this._lastForm != null)
+            && (this._lastForm.lastItem != null)) {
+    	    this._lastForm.setItem(this._lastForm.lastItem);
+        }
+    },
+    
 
     _createUI : function() {
 
@@ -93,7 +105,7 @@ dojo.declare('garm.components.main.form.FormController', null, {
     _onEditItem : function(item) {
 
         if (   (this._lastForm != null)
-            && (this._lastForm._lastItem == item)) {
+            && (this._lastForm.lastItem == item)) {
             return;
         }
         if (this.commitChanges()) { // commit old

@@ -7,5 +7,6 @@
 			<attribute name="hide" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="com.zend.jsdt.support.dojo.LIBRARY"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

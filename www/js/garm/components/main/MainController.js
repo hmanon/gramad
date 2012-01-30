@@ -261,7 +261,7 @@ dojo.declare('garm.components.main.MainController', null, {
             oldValue : itemLabel,
             onOk : dojo.hitch(this, function(result) {
                 this._mainStore.renameItem(item, result.value.newValue);
-                this._updateUI();
+                this._updateFormUI();
             })
         });
     },
@@ -355,6 +355,15 @@ dojo.declare('garm.components.main.MainController', null, {
     },
 
 
+    _updateFormUI : function() {
+
+        dojo.publish(garm.app.Constants.TOPIC_UPDATE_FORM_UI);
+        setTimeout(dojo.hitch(this, function() {
+            this._main.layout();
+        }), 500);
+    },
+    
+    
     _showMessage : function(message) {
 
         dojo.publish(garm.app.Constants.TOPIC_SHOW_MESSAGE, [message]);
@@ -462,7 +471,7 @@ dojo.declare('garm.components.main.MainController', null, {
                         for(var field in responseMap) {
                             this._mainStore.setValue(item, field, response[fileName][responseMap[field]]);
                         }
-                        this._updateUI();
+                        this._updateFormUI();
                     }
                 }
                 content += '</ul>';
