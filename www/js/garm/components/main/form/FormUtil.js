@@ -14,8 +14,7 @@ garm.components.main.form.FormUtil.PREPARE_COLOR_PICKER = function(label, item, 
            + ' animatePoint="false"'
            + ' webSafe="false"'
            + ' value="' + color + '"'
-           + '>'
-         + '</div>'
+           + '/>'
          + '</td><td>'
          + (buttons && buttons['spreadLabel']
            ?
@@ -37,33 +36,34 @@ garm.components.main.form.FormUtil.PREPARE_COLOR_PICKER = function(label, item, 
 };
 
 
-garm.components.main.form.FormUtil.PREPARE_IMAGE = function(label, item, field, width, height, defValue) {
+garm.components.main.form.FormUtil.PREPARE_IMAGE = function(label, item, field, width, height, defValue, buttons) {
 
     var url = item[field]
             ? item[field]
             : (defValue ? defValue : garm.app.Constants.IMG_EMPTY)
             ;
     return '<label>' + label + '</label>'
-         + '<br>'
-         + '<img'
-           + ' style="width: ' + width + 'px; height: ' + height + 'px;"'
-           + ' src="' + url +'"'
-           + ' alt="' + url +'"'
-           + ' title="' + label +'"'
-         + '/>'
+    	 + '<table><tr><td>'
+           + '<img'
+             + ' style="width: ' + width + 'px; height: ' + height + 'px;"'
+             + ' src="' + url +'"'
+             + ' alt="' + url +'"'
+             + ' title="' + label +'"'
+           + '/>'
+         + '</td><td>'
+           + garm.components.main.form.FormUtil.PREPARE_BUTTONS(buttons, item)
+         + '</td></tr></table>'
          ;
 };
 
 
-garm.components.main.form.FormUtil.PREPARE_DRAPES = function(label, item, field, defValue) {
+garm.components.main.form.FormUtil.PREPARE_DRAPES = function(label, item, field, defValue, buttons) {
 
     var drapes = item[field]
                ? item[field]
                : (defValue ? defValue : [[{ url : garm.app.Constants.IMG_EMPTY }]])
                ;
-    var content = '<label>' + label + '</label>';
-
-    content += '<table style="cellspacing:0px">';
+    var content = '<table style="cellspacing:0px">';
     dojo.forEach(drapes, function(row) {
         content += '<tr>';
         dojo.forEach(row, function(cell) {
@@ -74,23 +74,45 @@ garm.components.main.form.FormUtil.PREPARE_DRAPES = function(label, item, field,
         });
         content += '</tr>';
     });
-    content += '</table>';
-    return content;
+    content += '</table>'
+             ;
+    return '<label>' + label + '</label>'
+         + '<table><tr><td>'
+         + content
+         + '</td><td>'
+           + garm.components.main.form.FormUtil.PREPARE_BUTTONS(buttons, item)
+         + '</td></tr></table>'
+         ;
 };
 
 
-garm.components.main.form.FormUtil.PREPARE_SOUND = function(label, item, field) {
+garm.components.main.form.FormUtil.PREPARE_SOUND = function(label, item, field, buttons) {
 
     var url = item[field]
             ? item[field]
             : ''
             ;
     return '<label>' + label + '</label>'
-         + '<br>'
-         + '<input type="text"'
-           + ' name="' + field + '"'
-           + ' value="' + url + '"'
-           + '>'
-           + '</input>'
-         ;
+         + '<table><tr><td>'
+           + '<input type="text"'
+             + ' name="' + field + '"'
+             + ' value="' + url + '"'
+             + '/>'
+         + '</td><td>'
+           + garm.components.main.form.FormUtil.PREPARE_BUTTONS(buttons, item)
+         + '</td></tr></table>'
+         ;           
 };
+
+
+garm.components.main.form.FormUtil.PREPARE_BUTTONS = function(buttons, item) {
+    return (dojo.map(buttons ? buttons : [], function(button) {
+        return '<button dojoType="dijit.form.Button">'
+                + button['label']
+                + '<script type="dojo/method" data-dojo-event="onClick" data-dojo-args="evt">'
+                + 'dojo.publish(\'' + button['topic'] + '\', [\'' + item['id'] + '\']);'
+                + '</script>'
+              + '</button>'
+              ;
+    }).join(''));
+}

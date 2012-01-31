@@ -32,11 +32,18 @@ dojo.declare('garm.components.main.form.FormContinent', garm.components.main.for
                 'Image', item,
                 garm.app.Constants.FLD_CONTINENT_IMAGE_URL,
                 garm.app.Constants.IMAGE_WIDTH  / 3,
-                garm.app.Constants.IMAGE_HEIGHT / 3
+                garm.app.Constants.IMAGE_HEIGHT / 3,
+                null,
+                [{  label : 'Change',
+                    topic : garm.app.Constants.TOPIC_CHA_CONTINENT_IMAGE
+            	}]
             ),
             garm.components.main.form.FormUtil.PREPARE_SOUND(
                 'Sound', item,
-                garm.app.Constants.FLD_SOUND_URL
+                garm.app.Constants.FLD_SOUND_URL,
+                [{  label : 'Change',
+                    topic : garm.app.Constants.TOPIC_CHA_SOUND
+                }]
             ),
             garm.components.main.form.FormUtil.PREPARE_COLOR_PICKER(
                 'Site Color', item,

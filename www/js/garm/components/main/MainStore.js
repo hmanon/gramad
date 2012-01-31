@@ -91,6 +91,16 @@ dojo.declare('garm.components.main.MainStore', null, {
     },
 
 
+    getItemById : function(itemId, onItem, onError) {
+
+        this._store.fetchItemByIdentity({
+            identity : itemId,
+            onItem   : onItem  ? onItem  : function(item) {},
+            onError  : onError ? onError : function(item) {}
+        });
+    },
+    
+    
     getItemName : function(item) {
 
         return this._store.getLabel(item);

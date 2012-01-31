@@ -159,12 +159,14 @@ garm.app.Constants.PREPARE_ITEM_MENU_VALUES = function(item) {
 
     var itemLabel = item[garm.app.Constants.FLD_NAME];
     var separator = null;
+    /*
     var editItem = {
         label : 'Edit "' + itemLabel + '"',
         topic : garm.app.Constants.TOPIC_EDT_ITEM,
         iconClass: "dijitIcon dijitIconEditTask",
         item  : item
     };
+    */
     var renameItem = {
         label : 'Rename "' + itemLabel + '"',
         topic : garm.app.Constants.TOPIC_REN_ITEM,

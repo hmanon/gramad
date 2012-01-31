@@ -24,19 +24,31 @@ dojo.declare('garm.components.main.form.FormImage', garm.components.main.form.Fo
                 'Preview Image', item,
                 garm.app.Constants.FLD_IMAGE_PREVIEW_URL,
                 garm.app.Constants.IMAGE_PREVIEW_WIDTH,
-                garm.app.Constants.IMAGE_PREVIEW_HEIGHT
+                garm.app.Constants.IMAGE_PREVIEW_HEIGHT,
+                null,
+                [{  label : 'Change',
+                    topic : garm.app.Constants.TOPIC_CHA_PREVIEW
+                }]
             ),
             garm.components.main.form.FormUtil.PREPARE_IMAGE(
                 'Normal Image', item,
                 garm.app.Constants.FLD_IMAGE_URL,
                 garm.app.Constants.IMAGE_WIDTH  / 3,
-                garm.app.Constants.IMAGE_HEIGHT / 3
+                garm.app.Constants.IMAGE_HEIGHT / 3,
+                null,
+                [{  label : 'Change',
+                    topic : garm.app.Constants.TOPIC_CHA_IMAGE
+                }]
             ),
             garm.components.main.form.FormUtil.PREPARE_IMAGE(
                 'Fullscreen Image', item,
                 garm.app.Constants.FLD_IMAGE_FULL_URL,
                 garm.app.Constants.IMAGE_FULL_WIDTH  / 3,
-                garm.app.Constants.IMAGE_FULL_HEIGHT / 3
+                garm.app.Constants.IMAGE_FULL_HEIGHT / 3,
+                null,
+                [{  label : 'Change',
+                    topic : garm.app.Constants.TOPIC_CHA_FULL
+                }]
             ),
             garm.components.main.form.FormUtil.PREPARE_COLOR_PICKER(
                 'Site Color', item,

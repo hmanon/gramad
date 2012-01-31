@@ -498,12 +498,23 @@ dojo.declare('garm.components.main.MainController', null, {
                 });
             }
         });
-
-        garm.components.popup.PopUpFactory.getInstance().askForFiles(dojo.mixin({
-            title : 'Upload File(s)',
-            multiple : false,
-            maxFileSize : 10 * 1024 * 1024,
-            onOk : onFileSelect
-        }, fileParams));
+        var askForFiles = dojo.hitch(this, function() {
+            garm.components.popup.PopUpFactory.getInstance().askForFiles(dojo.mixin({
+                title : 'Upload File(s)',
+                multiple : false,
+                maxFileSize : 10 * 1024 * 1024,
+                onOk : onFileSelect
+            }, fileParams));    
+        });
+        
+        if (dojo.isString(item)) {
+            this._mainStore.getItemById(item, dojo.hitch(this, function(foundItem) {
+                item = foundItem;
+                askForFiles();  
+            }));
+        }
+        else {
+            askForFiles();
+        }
     }
 });

@@ -22,11 +22,18 @@ dojo.declare('garm.components.main.form.FormCountry', garm.components.main.form.
         var fields = [
             garm.components.main.form.FormUtil.PREPARE_DRAPES(
                 'Drapes', item,
-                garm.app.Constants.FLD_COUNTRY_DRAPES
+                garm.app.Constants.FLD_COUNTRY_DRAPES,
+                null,
+                [{  label : 'Change',
+                    topic : garm.app.Constants.TOPIC_CHA_COUNTRY_DRAPES
+                }]
             ),
             garm.components.main.form.FormUtil.PREPARE_SOUND(
                 'Sound', item,
-                garm.app.Constants.FLD_SOUND_URL
+                garm.app.Constants.FLD_SOUND_URL,
+                [{  label : 'Change',
+                    topic : garm.app.Constants.TOPIC_CHA_SOUND
+                }]
             ),
             garm.components.main.form.FormUtil.PREPARE_COLOR_PICKER(
                 'Site Color', item,
