@@ -43,11 +43,11 @@ require_once dirname(__FILE__).'/../../config.php';
         <script src="<?php echo DOJO_PATH;?>/dojo/dojo.js"></script>
         <script src="<?php echo DOJO_PATH;?>/dojo/garm.adminlayer.js"></script>
         <script type="text/javascript">
-            dojo.require("garm.app.AppController");
+            dojo.require("garm.app.AdminController");
 
             dojo.addOnLoad(function() {
 
-                var main = new garm.app.AppController("main");
+                var main = new garm.app.AdminController("main");
                 main.init();
 
                 setTimeout(function() {

@@ -7,6 +7,9 @@ define('DEFAULT_TZ', 'Europe/Moscow');
 
 //define('DOJO_PATH', '../js/dojo-release-1.6.1-src/release');
 define('DOJO_PATH', '../js/dojo-release-1.6.1-src');
+//define('DOJO_PATH', '../js/dojo-release-1.7.2-src');
+
+define('RAPH_PATH', '../js/raphael');
 
 define('DATAS_PATH', '../../forks');
 

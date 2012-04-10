@@ -30,7 +30,7 @@ dojo.require("dojox.widget.ColorPicker");
 dojo.require('uuid.UUID');
 
 dojo.require('garm.app.Constants');
-dojo.require("garm.app.AppController");
+dojo.require("garm.app.AdminController");
 dojo.require('garm.components.popup.PopUpFactory');
 dojo.require("garm.components.main.MainController");
 dojo.require('garm.components.main.MainStore');

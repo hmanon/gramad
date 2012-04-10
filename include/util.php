@@ -42,7 +42,11 @@ function treat_getForks($request) {
         forkShouldExists($fork);
         selectFork($fork);
     }
-    
+    if (array_key_exists('remove', $request)) {
+    	$fork = $request['remove'];
+    	forkShouldExists($fork);
+    	removeFork($fork);
+    }
     $needlePath = null;
     if (array_key_exists('mark', $request)) {
         $mark = $request['mark'];
@@ -279,7 +283,7 @@ function getDefaultForkPath() {
 function checkForkName($fork) {
     
     if (!preg_match(FORK_PREG, $fork)) { 
-        throw new Exception('Fork`s name contains wrong characters');
+        throw new Exception('Version`s name contains wrong characters');
     }
 } 
 
@@ -288,7 +292,7 @@ function createFork($fork) {
 
     $path = DATAS_PATH.'/'.$fork;
     if (is_file($path)) {
-        throw new Exception("Fork '$fork' already exists");
+        throw new Exception("Version '$fork' already exists");
     }
     fclose(fopen($path, 'x'));
 }
@@ -297,7 +301,7 @@ function createFork($fork) {
 function selectFork($fork) {
 
     if (!setcookie(COOKIE_FORK, $fork)) {
-        throw new Exception("Can`t select fork '$fork'");
+        throw new Exception("Can`t select version '$fork'");
     }
     $_COOKIE[COOKIE_FORK] = $fork;
 }
@@ -318,6 +322,22 @@ function switchFork($fork) {
 }
 
 
+function removeFork($fork) {
+	
+	if ($fork == DATA_DEFAULT) {
+		throw new Exception('Please don`t try to remove default version');
+	}
+	clearstatcache();
+	if (realpath(DATAS_PATH.'/'.$fork) == realpath(getCurrentForkPath())) {
+		throw new Exception('Please don`t try to remove version which is marked as "Activated Version"');
+	}
+	if (realpath(DATAS_PATH.'/'.$fork) == realpath(getSelectedForkPath())) {
+		throw new Exception('Please don`t try to remove version which is marked as "Selected Version"');
+	}
+	unlink(DATAS_PATH.'/'.$fork);
+}
+
+
 function isForkExists($fork) {
 
     $dirs = getForks();
@@ -328,7 +348,7 @@ function isForkExists($fork) {
 function forkShouldExists($fork) {
 
     if (!isForkExists($fork)) {
-        throw new Exception("Fork '$fork' not exists");
+        throw new Exception("Version '$fork' does not exist");
     }
 }
 

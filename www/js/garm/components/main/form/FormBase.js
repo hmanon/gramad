@@ -13,17 +13,32 @@ dojo.require("dojo.html");
 dojo.declare('garm.components.main.form.FormBase', dijit.form.Form, {
 
     menuButton : null,
+
+    renameButton : null,
+    renameLink : null,
+    
+    deleteButton : null,
+    deleteLink : null,
+    
     menu : null,
     contentNode : null,
     lastItem : null,
 
 
     init : function() {
+        this.renameButton = new dijit.form.Button({
+            label : "Rename"
+        }).placeAt(this.domNode);
+        
+        this.deleteButton = new dijit.form.Button({
+            label : "Delete"
+        }).placeAt(this.domNode);
+        
         this.menu = new dijit.Menu({
             style : "display: none;"
         });
         this.menuButton = new dijit.form.DropDownButton({
-            label : "Actions",
+            label : "All Actions",
             dropDown : this.menu
         }).placeAt(this.domNode);
 
@@ -42,6 +57,30 @@ dojo.declare('garm.components.main.form.FormBase', dijit.form.Form, {
             'disabled',
             !garm.app.Constants.PREPARE_ITEM_MENU(this.menu, item)
         );
+        // rename Button
+        this.renameButton.setAttribute(
+            'disabled',
+            !garm.app.Constants.GET_ITEM_MENU_VALUE(item, garm.app.Constants.TOPIC_REN_ITEM)
+        );
+        if (this.renameLink) {
+            dojo.disconnect(this.renameLink);
+        }
+        this.renameLink = dojo.connect(this.renameButton, 'onClick', this, function() {
+            dojo.publish(garm.app.Constants.TOPIC_REN_ITEM, [item]);
+        });
+        
+        // delete Button
+        this.deleteButton.setAttribute(
+            'disabled',
+            !garm.app.Constants.GET_ITEM_MENU_VALUE(item, garm.app.Constants.TOPIC_DEL_ITEM)
+        );
+        if (this.deleteLink) {
+            dojo.disconnect(this.deleteLink);
+        }
+        this.deleteLink = dojo.connect(this.deleteButton, 'onClick', this, function() {
+            dojo.publish(garm.app.Constants.TOPIC_DEL_ITEM, [item]);
+        });
+        
         var value = {};
         for(field in this.get('value')) {
             value[field] = item[field];

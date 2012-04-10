@@ -278,6 +278,7 @@ dojo.declare('garm.components.main.MainController', null, {
                     content : '<label>Please, give your confirmation <b>to delete "' + itemLabel + '"</b></label>',
                     onOk : dojo.hitch(this, function(result) {
                         this._mainStore.deleteItem(item);
+                        this._updateUI();
                     })
                 });
             }

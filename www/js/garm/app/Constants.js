@@ -104,6 +104,7 @@ garm.app.Constants.TOPIC_SAVE_DATA = 'garm.app.Constants.topicSaveData';
 garm.app.Constants.TOPIC_FORK_CREATE = 'garm.app.Constants.topicForkCreate';
 garm.app.Constants.TOPIC_FORK_SELECT = 'garm.app.Constants.topicForkSelect';
 garm.app.Constants.TOPIC_FORK_SWITCH = 'garm.app.Constants.topicForkSwitch';
+garm.app.Constants.TOPIC_FORK_REMOVE = 'garm.app.Constants.topicForkRemove';
 
 garm.app.Constants.TOPIC_UPDATE_UI      = 'garm.app.Constants.topicUpdateUI';
 garm.app.Constants.TOPIC_UPDATE_FORM_UI = 'garm.app.Constants.topicUpdateFormUI';
@@ -152,6 +153,17 @@ garm.app.Constants.PREPARE_ITEM_MENU = function(menu, item) {
         }
     }
     return (menuValues || []).length > 0;
+};
+
+
+garm.app.Constants.GET_ITEM_MENU_VALUE = function(item, topic) {
+    var menuValues = garm.app.Constants.PREPARE_ITEM_MENU_VALUES(item);
+    for (var i in menuValues) {
+        if (menuValues[i] != null && menuValues[i].topic == topic) {
+            return menuValues[i];
+        }
+    }
+    return false;
 };
 
 
@@ -212,6 +224,11 @@ garm.app.Constants.PREPARE_ITEM_MENU_VALUES = function(item) {
         { label : 'Activate Version',
           topic : garm.app.Constants.TOPIC_FORK_SWITCH,
           iconClass: "dijitIcon dijitIconUndo",
+          item  : item
+        },
+        { label : 'Remove Version',
+          topic : garm.app.Constants.TOPIC_FORK_REMOVE,
+          iconClass: "dijitIcon dijitIconDelete",
           item  : item
         }
     ];

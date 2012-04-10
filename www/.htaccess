@@ -13,7 +13,7 @@
 # php_value error_reporting -1
 # php_value log_errors_max_len 0
 
-<Files PHP_errors.log>
+<Files>
  Order allow,deny
  Deny from all
  Satisfy All
