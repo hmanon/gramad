@@ -1,7 +1,7 @@
-#Tue Feb 14 01:33:24 MSK 2012
+#Wed Apr 11 01:05:34 MSK 2012
 LaunchURL=http\://server/folder
 Save\ Mode=ON_SAVE
-SelectedHostGUID=79e34aac-05bc-41e3-93ad-439e11fb54df
-UploadFolder=test.gramadskikh.com
+SelectedHostGUID=278042f8-989f-499b-b018-39a83ffac4ef
+UploadFolder=./
 eclipse.preferences.version=1
 isRemoteProjectEnabled=true

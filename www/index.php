@@ -13,6 +13,17 @@ require_once dirname(__FILE__).'/../config.php';
                 margin: 0;
                 padding: 0;
                 overflow: hidden;
+                background: #ff0000;
+            }
+            #area {
+            	width: 100%;
+                height: 100%;
+            	background: #00ff00;
+            }
+			#holder {
+            	width: 100%;
+                height: 100%;
+            	background: #0000ff;
             }
 			#preloader {
 			    width: 100%;
@@ -45,7 +56,7 @@ require_once dirname(__FILE__).'/../config.php';
 
             dojo.addOnLoad(function() {
 
-                var main = new garm.app.SiteController("holder");
+                var main = new garm.app.SiteController("holder", "area");
                 main.init();
 
                 setTimeout(function() {
@@ -62,7 +73,9 @@ require_once dirname(__FILE__).'/../config.php';
     </head>
 
     <body>
-		<div id="preloader"></div>
-        <div id="holder"></div>
+	    <div id="preloader"></div>
+	    <div id="area">
+            <div id="holder"></div>
+        </div>    
     </body>
 </html>

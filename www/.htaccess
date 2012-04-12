@@ -13,8 +13,20 @@
 # php_value error_reporting -1
 # php_value log_errors_max_len 0
 
-<Files>
- Order allow,deny
- Deny from all
- Satisfy All
-</Files>
+#<Files>
+# Order allow,deny
+# Deny from all
+# Satisfy All
+#</Files>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/javascript text/css application/x-javascript
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4.0[678] no-gzip
+BrowserMatch bMSIE !no-gzip !gzip-only-text/html
+</IfModule>
+<ifmodule mod_gzip.c>
+mod_gzip_on Yes
+mod_gzip_item_include file \.js$
+mod_gzip_item_include file \.css$ </ifmodule>
+</IfModule>
